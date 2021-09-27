@@ -1,0 +1,9 @@
+.col {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 75%;
+  height: 25rem;
+}/*# sourceMappingURL=Home.css.map */

@@ -1,3 +1,6 @@
+import 'mdbootstrap/css/bootstrap.css';
+import 'mdbootstrap/css/mdb.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
