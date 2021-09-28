@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import axios from 'axios';
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
@@ -26,49 +26,45 @@ function CreatePost() {
             console.log("Successfully Done ! ");
             history.push("/");
         });    
-    }
-
-   
+    }   
 
     return (
-        <div className="container m-5 align-center">
-            
-            <div className="row">
-            <div className="col">
-                <div className="card createPostPage">
-            <Formik initialValues = {initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                <Form className="form-group formContainer">
-                    <label>Title : </label>
-                    <ErrorMessage name="title" component="span" />
-                    <Field
-                        
-                        id="inputCreatePost"
-                        name="title"
-                        placeholder="Title here"
-                    /><br/>
-                    <label>Your Message : </label>
-                    <ErrorMessage name="postTextMsg" component="span" />
-                    <Field
-                        
-                        id="inputCreatePost"
-                        name="postTextMsg"
-                        placeholder="Type your message"
-                    /><br/>
-                    <label>Your Name : </label>
-                    <ErrorMessage name="userName" component="span" />
-                    <Field
-                        
-                        id="inputCreatePost"
-                        name="userName"
-                        placeholder="Your name"
-                    /><br/>
-                    <button type="submit">Send Message</button>
-                </Form>
-            </Formik>
+        <Fragment>
+            <div className="container m-5 align-center">
+                <div className="row">
+                    <div className="col">
+                        <div className="card createPostPage">
+                            <Formik initialValues = {initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                                <Form className="form-group formContainer">
+                                    <label>Title : </label>
+                                    <ErrorMessage name="title" component="span" />
+                                    <Field                        
+                                        id="inputCreatePost"
+                                        name="title"
+                                        placeholder="Title here"
+                                    /><br/>
+                                    <label>Your Message : </label>
+                                    <ErrorMessage name="postTextMsg" component="span" />
+                                    <Field                        
+                                        id="inputCreatePost"
+                                        name="postTextMsg"
+                                        placeholder="Type your message"
+                                    /><br/>
+                                    <label>Your Name : </label>
+                                    <ErrorMessage name="userName" component="span" />
+                                    <Field
+                                        id="inputCreatePost"
+                                        name="userName"
+                                        placeholder="Your name"
+                                    /><br/>
+                                    <button type="submit">Send Message</button>
+                                </Form>
+                            </Formik>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
-        </div>
+        </Fragment>
     )
 }
 

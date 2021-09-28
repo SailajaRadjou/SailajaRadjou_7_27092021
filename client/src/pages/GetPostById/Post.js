@@ -43,27 +43,33 @@ function Post() {
                                 </p>
                                 <a href="/#" className="card-link">{PostObject.userName}</ a>
                             
-                            <div className="form-group shadow-textarea">
-                                        <label htmlFor="exampleFormControlTextarea6">Comments : </label>
-                                        <textarea 
-                                            className="form-control z-depth-1"
-                                            id="exampleFormControlTextarea6"
-                                            rows="3" placeholder="Write something here..."
-                                            value={newComment}
-                                            onChange={(event) => {setNewComment(event.target.value)}}>
-                                        </textarea>
-                                    </div>
-                                    <div>
-                                        <button className="btn btn-primary" type="submit" onClick={addComment}>Comments</button>
-                                        <button className="btn btn-primary" type="submit">Like</button>
-                                    </div>   
-                                    <div>
-                                        {comments.map((comment, key) => {
-                                            return(<div className="m-2" key={key}> <input className="form-control" disabled={true}  placeholder={comment.commentBody} />
-                                                </div>);
-                                        })}
-                                    </div> 
-                                    </div>       
+                                <div className="form-group shadow-textarea">
+                                    <label htmlFor="exampleFormControlTextarea6">Comments : </label>
+                                    <textarea 
+                                        className="form-control z-depth-1"
+                                        id="exampleFormControlTextarea6"
+                                        rows="3" placeholder="Write something here..."
+                                        value={newComment}
+                                        onChange={(event) => {
+                                            setNewComment(event.target.value)
+                                        }}>
+                                    </textarea>
+                                </div>
+                                <div>
+                                    <button className="btn btn-primary" type="submit" onClick={addComment}>Comments</button>
+                                    <button className="btn btn-primary" type="submit">Like</button>
+                                </div>   
+                                <div>
+                                    {
+                                        comments.map((comment, key) => {
+                                        return(
+                                            <div className="m-2" key={key}>
+                                                 <input className="form-control" disabled={true}  placeholder={comment.commentBody} />
+                                            </div>);
+                                        })
+                                    }
+                                </div> 
+                            </div>       
                         </div>
                     </div>
                 </div>
