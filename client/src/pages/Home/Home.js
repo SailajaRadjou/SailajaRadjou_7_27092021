@@ -2,34 +2,48 @@ import React, {Fragment} from 'react';
 import axios from 'axios';
 import { useEffect, useState} from "react";
 import { useHistory } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 import '../Home/styles/Home.css';
 
 function Home() {
     const [AllPosts, setAllPosts] = useState([]);
+    
     let history = useHistory();
+
 
     useEffect(() => {
         axios.get("http://localhost:3001/posts")
         .then((response) => {
             setAllPosts(response.data);
         });
+        
     }, []);
     return (
         <Fragment>
             {AllPosts.map((value, key) => {
                 return (
-                    <div className="container m-5 align-center">
+                    <div key={key} className="container m-5 align-center">
                         <div className="row">
                             <div className="col">
-                                <div class="card">
-                                <div class="card-body" onDoubleClick={() => {history.push(`/post/${value.id}`)}}>
-                                    <h5 class="card-title">{value.title}</h5>
-                                    <p class="card-text">{value.postTextMsg}</p>
-                                    <h6 class="card-subtitle mb-2 text-muted">{value.userName}</h6>
-                                    <a href="/" class="card-link">Comments</a>
-                                    <a href="/" class="card-link">Back to Forum</a>
-                                </div>
+                                <div className="card">
+                                <div className="card-body" onDoubleClick={() => {history.push(`/post/${value.id}`)}}>
+                                    <h5 className="card-title">{value.title}</h5>
+                                    <p className="card-text">{value.postTextMsg}</p>
+                                    <h6 className="card-subtitle mb-2 text-muted">{value.userName}</h6>
+                                 
+                                    <div className="form-group shadow-textarea">
+                                        <label htmlFor="exampleFormControlTextarea6">Comments : </label>
+                                        <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here..."></textarea>
+                                    </div>
+                                    <div>
+                                        <button className="btn btn-primary" type="submit">Comments</button>
+                                        <button className="btn btn-primary" type="submit">Like</button>
+                                    </div>   
+                                    
+                                    {/*<a href="/" className="card-link">Comments</a>
+                                    <a href="/" className="card-link">Back to Forum</a>*/}
+                                    </div>   
                                 </div>
                             </div>
                         </div>        
