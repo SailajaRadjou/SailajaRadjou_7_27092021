@@ -3,16 +3,21 @@ import './App.css';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Home from './pages/Home/Home';
 import CreatePost from './pages/CreatePost/CreatePost';
+import Post from './pages/GetPostById/Post';
 function App() {
   
   return (
     <div className="App">
       <Router>
-        <Link to="/createpost">Create A Post</Link>
-        <Link to="/">Home Page</Link>
+      <div className="navbar navbar-expand-lg navbar-light">
+          <Link to="/"> Home Page</Link>
+          <Link to="/createpost"> Create A Post</Link>
+        </div>
+        
         <Switch>
           <Route path="/" exact component = { Home } />
           <Route path="/createpost" exact component = { CreatePost } />
+          <Route path="/post/:id" exact component = { Post } />
         </Switch>
       </Router>
     </div>
