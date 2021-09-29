@@ -6,7 +6,7 @@ function Login() {
     const [password, setPassword] = useState("");
 
     const login = () => {
-        const data = { userName: username, password: password};
+        const data = { username: username, password: password};
         axios.post("http://localhost:3001/auth/login", data)
             .then((response) => {
                 console.log(response.data);

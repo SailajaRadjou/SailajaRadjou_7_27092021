@@ -15,10 +15,14 @@ function Signup() {
     });
 
     const onSubmit = (data) => {
+        try{
         axios.post("http://localhost:3001/auth/signup", data)
             .then(() => {
-                console.log(data);
-            });
+                console.log("data"+data);
+            })
+        }    
+        catch(e)
+        {alert("Désolé User Existe déja!" + e)};
     };
 
 
