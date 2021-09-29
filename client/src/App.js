@@ -13,18 +13,23 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <div className="navbar navbar-expand-lg navbar-light">
-          <Link to="/"> Home Page</Link>
-          <Link to="/createpost"> Create A Post</Link>
-          <Link to="/login"> Login</Link>
-          <Link to="/registration">Signup</Link>
+      <div className="navbar">
+          
+          <nav className="navbar-expand-lg navbar-light bg-blue">
+          <ul className="navbar-nav mr-auto">
+          <li><Link to={"/"}> Home Page</Link></li>
+          <li><Link to={"/createpost"}> Create A Post</Link></li>
+          <li><Link to={"/login"}> Login</Link></li>
+          <li> <Link to={"/signup"}>Signup</Link></li>
+          </ul>
+          </nav>
         </div>
         
         <Switch>
           <Route path="/" exact component = { Home } />
           <Route path="/createpost" exact component = { CreatePost } />
           <Route path="/post/:id" exact component = { Post } />
-          <Route path="/registration" exact component = { Signup } />
+          <Route path="/signup" exact component = { Signup } />
           <Route path="/login" exact component = { Login } />
         </Switch>
       </Router>

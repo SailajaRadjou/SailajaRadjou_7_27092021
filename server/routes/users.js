@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const {Users} = require('../models');
 const bcrypt = require('bcrypt');
+const { validateToken } = require("../middlewares/AuthMiddleware");
+const { sign } = require("jsonwebtoken");
 
 router.post("/signup", async (req, res) => {
     const { userName, password } = req.body;
@@ -35,9 +37,18 @@ router.post("/login", async (req, res) => {
         return res.status(401).json({ message: 'Mot de Passe Incorrect ! ' });         
        }
     else
-      res.json("YOU LOGGED IN!!!");
+    {
+        const accessToken = sign(
+            { username: user.username, id: user.id },
+            "importantsecret"
+          );
+          res.json(accessToken);
+    }
+     
     }).catch(error => res.status(500).json({ error }))
   });
-
+  router.get("/auth", validateToken, (req, res) => {
+    res.json(req.user);
+  });
 
 module.exports = router;
