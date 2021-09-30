@@ -57,8 +57,9 @@ router.post("/login", async (req, res, next) => {
      
     }).catch(error => {res.status(500).json({ error })});
   });
-  /*router.get("/auth", validateToken, (req, res) => {
+  
+  router.get("/token", validateToken, (req, res) => {
     res.json(req.user);
   });
-*/
+
 module.exports = router;

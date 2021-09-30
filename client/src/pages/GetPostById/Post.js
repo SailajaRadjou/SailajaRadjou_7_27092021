@@ -17,7 +17,7 @@ function Post() {
         });
   }, []); 
   
-  const addComment = (e) => {
+  const addComment = () => {
     if(localStorage.getItem("accessToken")===null){
         alert("login fist");
     }
@@ -46,7 +46,7 @@ function Post() {
   };
 
     return (
-        <div>
+        <Fragment>
             <div className="container m-5 align-center">
                 <div className="row">
                     <div className="col">
@@ -91,7 +91,7 @@ function Post() {
                     </div>
                 </div>
             </div>
-        </div>            
+        </Fragment>            
     );
 }
 

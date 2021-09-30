@@ -21,7 +21,7 @@ function CreatePost() {
     });
 
     const onSubmit = (data) => {
-        if(localStorage.getItem("accessToken")===""){
+        if(localStorage.getItem("accessToken")===null){
             alert("login fist");
         }
         else{
@@ -35,7 +35,7 @@ function CreatePost() {
             console.log("Successfully Done ! ");
             history.push("/");
         });
-        }    
+    }   
        
     }   
 
