@@ -21,11 +21,22 @@ function CreatePost() {
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001/posts", data)
+        if(localStorage.getItem("accessToken")===""){
+            alert("login fist");
+        }
+        else{
+        axios.post("http://localhost:3001/posts", data,
+        {
+            headers: {
+              accessToken: localStorage.getItem("accessToken")
+            }
+        })
         .then((response) => {
             console.log("Successfully Done ! ");
             history.push("/");
-        });    
+        });
+        }    
+       
     }   
 
     return (

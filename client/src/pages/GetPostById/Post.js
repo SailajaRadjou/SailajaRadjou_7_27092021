@@ -18,7 +18,9 @@ function Post() {
   }, []); 
   
   const addComment = (e) => {
-    
+    if(localStorage.getItem("accessToken")===null){
+        alert("login fist");
+    }
     //e.preventDefault();
       axios.post("http://localhost:3001/comments", {
           commentBody: newComment,
@@ -32,12 +34,15 @@ function Post() {
       .then((response) => {
         if (response.data.error) {
             console.log("response.data.error"+response.data.error);
-          } else {
-            const commentToAdd = { commentBody: newComment, userName: response.data.userName };
-            setComments([...comments, commentToAdd]);
-            setNewComment("");
+            
+          } else 
+           {             
+                const commentToAdd = { commentBody: newComment, userName: response.data.userName };
+                setComments([...comments, commentToAdd]);
+                setNewComment("");
           }
-      });
+      })
+      
   };
 
     return (

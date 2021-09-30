@@ -7,6 +7,7 @@ const { sign } = require("jsonwebtoken");
 
 router.post("/signup", async (req, res, next) => {
     const { userName, password } = req.body;
+    console.log("signup entered user"+req.body);
     const user = await Users.findOne({ where : {userName: userName}});
     if (user) {
         return res.status(401).json({ message: 'Utilisateur déja existe ! ' });
@@ -18,7 +19,7 @@ router.post("/signup", async (req, res, next) => {
             password: hash
           });
             res.status(201).json({ message: 'Utilisateur Créé !'});
-            next();
+           
         });
     } 
 });
@@ -51,10 +52,10 @@ router.post("/login", async (req, res, next) => {
           console.log("Access Token user.js : "+accessToken);
           res.json(accessToken);
           res.json(req.body.userName);
-         
+         next();
     }
      
-    }).catch(error => res.status(500).json({ error }))
+    }).catch(error => {res.status(500).json({ error })});
   });
   /*router.get("/auth", validateToken, (req, res) => {
     res.json(req.user);
