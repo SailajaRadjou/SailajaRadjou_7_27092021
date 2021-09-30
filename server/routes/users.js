@@ -5,50 +5,59 @@ const bcrypt = require('bcrypt');
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
-router.post("/signup", async (req, res) => {
+router.post("/signup", async (req, res, next) => {
     const { userName, password } = req.body;
     const user = await Users.findOne({ where : {userName: userName}});
     if (user) {
         return res.status(401).json({ message: 'Utilisateur déja existe ! ' });
     } else {
         bcrypt.hash(password, 10).then((hash) => {
+          console.log("Signed in User Name : "+userName);
         Users.create({
             userName: userName,
             password: hash
           });
-        
-          res.json("SUCCESS");
+            res.status(201).json({ message: 'Utilisateur Créé !'});
+            next();
         });
-    }    
+    } 
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res, next) => {
     const { username, password } = req.body;
-  
-    const user = await Users.findOne({ where: { username: username } });
-  
+  console.log(req.body);
+    const user = await Users.findOne({ where: { userName: username } });
+    console.log(user);
     if (!user) {
         return res.status(401).json({ message: 'Utilisateur Non Trouvé ! ' });
         
     }
   
     bcrypt.compare(password, user.password).then((match) => {
+      console.log("user.password : " + user.password);
       if (!match) {        
         return res.status(401).json({ message: 'Mot de Passe Incorrect ! ' });         
        }
     else
     {
         const accessToken = sign(
-            { username: user.username, id: user.id },
-            "importantsecret"
+            { userName: user.username, id: user.id },
+            'RANDOM_TOKEN_SECRET'
           );
+          const username=user.userName;
+          req.body.userName=username;
+          console.log("username :" + username);
+          console.log("req.body.username :" + username);
+          console.log("Access Token user.js : "+accessToken);
           res.json(accessToken);
+          res.json(req.body.userName);
+         
     }
      
     }).catch(error => res.status(500).json({ error }))
   });
-  router.get("/auth", validateToken, (req, res) => {
+  /*router.get("/auth", validateToken, (req, res) => {
     res.json(req.user);
   });
-
+*/
 module.exports = router;

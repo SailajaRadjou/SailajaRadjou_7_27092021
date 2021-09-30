@@ -4,7 +4,7 @@ import axios from "axios";
 import '../GetPostById/Post.css';
 function Post() {
   let {id} = useParams();
-  const [PostObject, setPostObject] = useState({});
+  const [postObject, setPostObject] = useState({});
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   useEffect(() => {
@@ -17,20 +17,21 @@ function Post() {
         });
   }, []); 
   
-  const addComment = () => {
+  const addComment = (e) => {
+    
+    //e.preventDefault();
       axios.post("http://localhost:3001/comments", {
           commentBody: newComment,
           PostId: id
       },
       {
         headers: {
-          accessToken: localStorage.getItem("accessToken"),
+          accessToken: localStorage.getItem("accessToken")
         }
-      }
-      )
+      })
       .then((response) => {
         if (response.data.error) {
-            console.log(response.data.error);
+            console.log("response.data.error"+response.data.error);
           } else {
             const commentToAdd = { commentBody: newComment, userName: response.data.userName };
             setComments([...comments, commentToAdd]);
@@ -40,18 +41,18 @@ function Post() {
   };
 
     return (
-        <Fragment>
+        <div>
             <div className="container m-5 align-center">
                 <div className="row">
                     <div className="col">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">{PostObject.title}</h5>
+                                <h5 className="card-title">{postObject.title}</h5>
                                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
                                 <p className="card-text">
-                                    {PostObject.postTextMsg}
+                                    {postObject.postTextMsg}
                                 </p>
-                                <a href="/#" className="card-link">{PostObject.userName}</ a>
+                                <a href="/#" className="card-link">{postObject.userName}</ a>
                             
                                 <div className="form-group shadow-textarea">
                                     <label htmlFor="exampleFormControlTextarea6">Comments : </label>
@@ -74,6 +75,7 @@ function Post() {
                                         comments.map((comment, key) => {
                                         return(
                                             <div className="m-2" key={key}>
+                                                <label>Username : {comment.userName}</label>
                                                  <input className="form-control" disabled={true}  placeholder={comment.commentBody} />
                                             </div>);
                                         })
@@ -84,7 +86,7 @@ function Post() {
                     </div>
                 </div>
             </div>
-        </Fragment>            
+        </div>            
     );
 }
 
