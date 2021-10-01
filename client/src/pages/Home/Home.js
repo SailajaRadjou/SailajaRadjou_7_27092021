@@ -33,7 +33,9 @@ function Home() {
                                     
                                         <div className="form-group shadow-textarea">
                                             <label htmlFor="exampleFormControlTextarea6">Comments : </label>
-                                            <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here..."></textarea>
+                                            <textarea className="form-control z-depth-1"
+                                             id="exampleFormControlTextarea6"
+                                             rows="3" placeholder="Write something here..."></textarea>
                                         </div>
                                         <div>
                                             <button className="btn btn-primary" type="submit">Comments</button>
