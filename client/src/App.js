@@ -6,6 +6,7 @@ import CreatePost from './pages/CreatePost/CreatePost';
 import Post from './pages/GetPostById/Post';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
+import Profile from './pages/Profile/Profile';
 import { AuthContext } from './Helpers/AuthContext';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
@@ -13,11 +14,11 @@ import axios from 'axios';
 
 function App() {
   const [authState, setAuthState] = useState({
-    userName: "",
+    username: "",
     id: 0,
-    status: false
+    status: false,
   });
-
+  
   useEffect(() => {
     axios.get('http://localhost:3001/auth/token', 
     {
@@ -30,10 +31,11 @@ function App() {
         setAuthState({ ...authState, status: false });
       }
       else{
+        
         setAuthState({
-          userName: response.data.userName,
+          username: JSON.parse(response.data.userName),
           id: response.data.id,
-          status: true
+          status: true,
         });
       }
     });    
@@ -41,12 +43,12 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem("accessToken");
-    setAuthState({ userName: "", id: 0, status: false });
+    setAuthState({ username: "", id: 0, status: false });
   };
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ authState, setAuthState }}>
+      <AuthContext.Provider value={{ authState, setAuthState}}>
       <Router>
       <div className="navbar">
           
@@ -62,10 +64,9 @@ function App() {
           ):(
             <div>
               <h3>Logged as :
-                {setAuthState.userName}
-              </h3>
-              {
-                authState.status && 
+                {authState.username}
+              </h3>              
+              {authState.status && 
                   <button type="button"
                     className="btn btn-secondary btn-sm"
                     onClick={ logout }>
