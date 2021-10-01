@@ -62,7 +62,7 @@ function App() {
           ):(
             <div>
               <h3>Logged as :
-                {authState.id}
+                {setAuthState.userName}
               </h3>
               {
                 authState.status && 
