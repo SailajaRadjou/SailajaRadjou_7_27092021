@@ -12,7 +12,11 @@ import axios from 'axios';
 
 
 function App() {
-  const [authState, setAuthState] = useState(false);
+  const [authState, setAuthState] = useState({
+    userName: "",
+    id: 0,
+    status: false
+  });
 
   useEffect(() => {
     axios.get('http://localhost:3001/auth/token', 
@@ -23,18 +27,21 @@ function App() {
     }) 
     .then ((response) => {
       if (response.data.error){
-        setAuthState(false);
+        setAuthState({ ...authState, status: false });
       }
       else{
-        setAuthState(true);
+        setAuthState({
+          userName: response.data.userName,
+          id: response.data.id,
+          status: true
+        });
       }
-    });
-    
+    });    
   }, []);
 
   const logout = () => {
     localStorage.removeItem("accessToken");
-    setAuthState(false);
+    setAuthState({ userName: "", id: 0, status: false });
   };
 
   return (
@@ -47,21 +54,28 @@ function App() {
           <ul className="navbar-nav mr-auto">
           <li><Link to={"/"}> Home Page</Link></li>
           <li><Link to={"/createpost"}> Create A Post</Link></li>
-          { !authState ? (
+          { !authState.status ? (
             <>
             <li><Link to={"/login"}> Login</Link></li>
             <li> <Link to={"/signup"}>Signup</Link></li>
             </>
-          ) : (
+          ):(
             <div>
-              <button type="button"
-              className="btn btn-secondary btn-sm"
-              onClick={ logout }>
-                Logout
-              </button>
+              <h3>Logged as :
+                {authState.id}
+              </h3>
+              {
+                authState.status && 
+                  <button type="button"
+                    className="btn btn-secondary btn-sm"
+                    onClick={ logout }>
+                    Logout
+                  </button>
+              }    
             </div>
-          )}          
+          )} 
           </ul>
+            
           </nav>
         </div>
         

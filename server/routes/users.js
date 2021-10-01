@@ -50,7 +50,7 @@ router.post("/login", async (req, res, next) => {
           console.log("username :" + username);
           console.log("req.body.username :" + username);
           console.log("Access Token user.js : "+accessToken);
-          res.json(accessToken);
+          res.json({ token: accessToken, userName: username, id: user.id });
           res.json(req.body.userName);
          next();
     }
@@ -58,8 +58,13 @@ router.post("/login", async (req, res, next) => {
     }).catch(error => {res.status(500).json({ error })});
   });
   
-  router.get("/token", validateToken, (req, res) => {
+  router.get("/token", validateToken, async(req, res, next) => {
+    console.log("user body : "+ JSON.stringify(req.user));
+    const userBody=req.user;
+    const user = await Users.findOne({ where: { id: userBody.id } });
+    console.log("user logged : "+ JSON.stringify(user));
     res.json(req.user);
+    
   });
 
 module.exports = router;

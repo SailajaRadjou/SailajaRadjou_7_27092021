@@ -1,12 +1,14 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../../Helpers/AuthContext";
 import '../GetPostById/Post.css';
 function Post() {
   let {id} = useParams();
   const [postObject, setPostObject] = useState({});
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  //const { authState } = useContext(AuthContext);
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);

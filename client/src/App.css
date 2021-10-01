@@ -25,7 +25,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
 }
-
+h1{
+  color: blue;
+  background-color: tomato;
+}
 .navbar a {
   margin-left: 20px;
   text-decoration: none;
