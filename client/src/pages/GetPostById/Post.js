@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, useContext, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Helpers/AuthContext";
@@ -8,7 +8,7 @@ function Post() {
   const [postObject, setPostObject] = useState({});
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  //const { authState } = useContext(AuthContext);
+  const {authState} = useContext(AuthContext);
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
@@ -47,6 +47,20 @@ function Post() {
       
   };
 
+  const deleteComment = (id) => {
+    axios
+      .delete(`http://localhost:3001/comments/${id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then(() => {
+        setComments(
+          comments.filter((val) => {
+            return val.id != id;
+          })
+        );
+      });
+  };
+
     return (
         <Fragment>
             <div className="container m-5 align-center">
@@ -81,9 +95,20 @@ function Post() {
                                     {
                                         comments.map((comment, key) => {
                                         return(
+                                            <div>
                                             <div className="m-2" key={key}>
                                                 <label>Username : {comment.userName}</label>
                                                  <input className="form-control" disabled={true}  placeholder={comment.commentBody} />
+                                            </div>
+                                            <label>authuser:{comment.userName}</label>
+                                                {authState.userName === comment.userName && (
+                                                        <button onClick = {() => {
+                                                            deleteComment(comment.id);
+                                                        }}>
+                                                            Supprimer
+                                                        </button>
+                                                    )}
+                                            
                                             </div>);
                                         })
                                     }

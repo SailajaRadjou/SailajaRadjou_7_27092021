@@ -19,7 +19,7 @@ function Login() {
           } else {
             localStorage.setItem("accessToken", response.data.token);
             setAuthState({
-                username: response.data.username,
+                userName: response.data.userName,
                 id: response.data.id,
                 status: true,
             });
