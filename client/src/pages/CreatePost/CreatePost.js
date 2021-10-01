@@ -25,17 +25,12 @@ function CreatePost() {
             alert("login fist");
         }
         else{
-        axios.post("http://localhost:3001/posts", data,
-        {
-            headers: {
-              accessToken: localStorage.getItem("accessToken")
-            }
-        })
-        .then((response) => {
-            console.log("Successfully Done ! ");
-            history.push("/");
-        });
-    }   
+            axios.post("http://localhost:3001/posts", data)
+            .then((response) => {
+                console.log("Successfully Done ! ");
+                history.push("/");
+            });
+        }   
        
     }   
 
