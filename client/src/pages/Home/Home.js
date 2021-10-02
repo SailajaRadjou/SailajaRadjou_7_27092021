@@ -17,13 +17,11 @@ function Home() {
         { headers: { accessToken: localStorage.getItem("accessToken") } })
         .then((response) => {
             setAllPosts(response.data.AllPosts);
-           /* setLikedPosts(
+            setLikedPosts(
                 response.data.likedPosts.map((like) => {
                     return like.PostId;
                 })
-            );*/
-            setLikedPosts(response.data.likedPosts);
-            console.log(response.data.likedPosts);
+            );
         });
         
     }, []);
@@ -48,7 +46,15 @@ function Home() {
                     return post;
                 }
             }));
-            alert(JSON.stringify(response.data));
+            if (likedPosts.includes(postId)) {
+                setLikedPosts(
+                  likedPosts.filter((id) => {
+                    return id != postId;
+                  })
+                );
+              } else {
+                setLikedPosts([...likedPosts, postId]);
+              }
         });
     };
 
@@ -76,7 +82,9 @@ function Home() {
                                     <div>
                                             <button className="btn btn-primary" type="submit">Comments</button>
                                             <ThumbUpAltIcon
-                                                onClick = {() => {likeAPost(value.id)}}></ThumbUpAltIcon>
+                                                onClick = {() => {likeAPost(value.id)}}
+                                                className={!likedPosts.includes(value.id) ? "unLikeBtn" : "likeBtn"}
+                                                />
                                             <label> {value.Likes.length} </label>
                                     </div>    
                                 </div>

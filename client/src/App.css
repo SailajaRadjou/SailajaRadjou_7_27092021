@@ -34,3 +34,10 @@ h1{
   text-decoration: none;
   color: white;
 }
+
+.likeBtn {
+  color: dodgerblue;
+}
+.unLikeBtn {
+  color: rgb(133, 190, 228);
+}
