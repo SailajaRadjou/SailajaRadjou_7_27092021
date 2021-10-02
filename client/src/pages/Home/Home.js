@@ -2,19 +2,28 @@ import React, {Fragment} from 'react';
 import axios from 'axios';
 import { useEffect, useState} from "react";
 import { useHistory } from 'react-router-dom';
-
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import '../Home/styles/Home.css';
 
 function Home() {
     const [AllPosts, setAllPosts] = useState([]);
-    
+    const [likedPosts, setLikedPosts] = useState([]);
+
     let history = useHistory();
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/posts")
+        axios.get("http://localhost:3001/posts",
+        { headers: { accessToken: localStorage.getItem("accessToken") } })
         .then((response) => {
-            setAllPosts(response.data);
+            setAllPosts(response.data.AllPosts);
+           /* setLikedPosts(
+                response.data.likedPosts.map((like) => {
+                    return like.PostId;
+                })
+            );*/
+            setLikedPosts(response.data.likedPosts);
+            console.log(response.data.likedPosts);
         });
         
     }, []);
@@ -66,12 +75,10 @@ function Home() {
                                     </div>  
                                     <div>
                                             <button className="btn btn-primary" type="submit">Comments</button>
-                                            <label> </label>
-                                            <button className="btn btn-primary"
-                                             type="submit"
-                                             onClick = {() => {likeAPost(value.id)}}>{value.Likes.length}{" "}  Like </button>
-                                             
-                                        </div>    
+                                            <ThumbUpAltIcon
+                                                onClick = {() => {likeAPost(value.id)}}></ThumbUpAltIcon>
+                                            <label> {value.Likes.length} </label>
+                                    </div>    
                                 </div>
                             </div>
                         </div>        
