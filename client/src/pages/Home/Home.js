@@ -18,6 +18,31 @@ function Home() {
         });
         
     }, []);
+
+    const likeAPost = (postId) => {
+        axios.post("http://localhost:3001/likes",
+        { PostId: postId },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+        ).then((response) => {
+            setAllPosts(AllPosts.map((post) => {
+                if(post.id === postId){
+                    if(response.data.liked){
+                        return{...post, Likes: [...post.Likes, 0] };
+                    }
+                    else{
+                        const likesArray = post.Likes;
+                        likesArray.pop();
+                        return {...post, Likes: likesArray };
+                    }
+                }
+                else{
+                    return post;
+                }
+            }));
+            alert(JSON.stringify(response.data));
+        });
+    };
+
     return (
         <Fragment>
             {AllPosts.map((value, key) => {
@@ -37,11 +62,16 @@ function Home() {
                                              id="exampleFormControlTextarea6"
                                              rows="3" placeholder="Write something here..."></textarea>
                                         </div>
-                                        <div>
+                                                                               
+                                    </div>  
+                                    <div>
                                             <button className="btn btn-primary" type="submit">Comments</button>
-                                            <button className="btn btn-primary" type="submit">Like</button>
-                                        </div>                                           
-                                    </div>   
+                                            <label> </label>
+                                            <button className="btn btn-primary"
+                                             type="submit"
+                                             onClick = {() => {likeAPost(value.id)}}>{value.Likes.length}{" "}  Like </button>
+                                             
+                                        </div>    
                                 </div>
                             </div>
                         </div>        
@@ -49,7 +79,7 @@ function Home() {
                 );
             })}
         </Fragment>
-    )
+    );
 }
 
 export default Home
