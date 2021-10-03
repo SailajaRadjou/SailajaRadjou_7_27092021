@@ -8,6 +8,7 @@ import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import PageNotFound from './pages/PageNotFound';
 import Profile from './pages/Profile/Profile';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
 import { AuthContext } from './Helpers/AuthContext';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
@@ -98,6 +99,7 @@ function App() {
           <Route path="/signup" exact component = { Signup } />
           <Route path="/login" exact component = { Login } />
           <Route path="/profile/:id" exact component = { Profile } />
+          <Route path="/changepassword" exact component = { ChangePassword } />
           <Route path="*" exact component = { PageNotFound } />
         </Switch>
       </Router>

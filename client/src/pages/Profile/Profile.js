@@ -1,12 +1,12 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState, useContext} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
-
+import { AuthContext } from "../../Helpers/AuthContext";
 function Profile() {
 
     let { id } = useParams();
     let history = useHistory();
-
+    const {authState} = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [allPosts, setAllPosts] = useState([]);
 
@@ -25,11 +25,16 @@ function Profile() {
     return (
         <Fragment>
             <div>
-                <div class="card text-center m-5">
-                    <div class="card-body">
-                        <h5 class="card-title"> Username: {username}</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div className="card text-center m-5">
+                    <div className="card-body">
+                        <h5 className="card-title"> Username: {username}</h5>
+                        {authState.username === username && (
+                            <button className="btn btn-primary" type="submit"
+                                onClick={() => {
+                                    history.push("/changepassword");
+                                }}>Change Password</button>
+                        )}
+                        
                     </div>
                 </div>
                 {allPosts.map((value, key) => {

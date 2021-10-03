@@ -71,6 +71,26 @@ router.post("/login", async (req, res, next) => {
     const id = req.params.id;
     const profileinfo = await Users.findByPk(id, {attributes: { exclude: ["password"] }});
     res.json(profileinfo);
-  })
+  });
+
+  router.put("/changepassword", validateToken, async(req,res) => {
+    const { oldPassword, newPassword } = req.body;
+    console.log(oldPassword);
+    console.log(newPassword);
+    console.log("req.user.username password: "+req.body.id);
+    const user = await Users.findOne({ where : {id: req.body.id}});
+    console.log("user passwordfile: "+ JSON.stringify(user));
+    bcrypt.compare(oldPassword, user.password).then(async (match) => {
+      if (!match) res.json({ error: "Wrong Password Entered !" });
+  
+      bcrypt.hash(newPassword, 10).then((hash) => {
+        Users.update(
+          { password: hash },
+          { where: { userName: user.userName } }
+        );
+        res.json("SUCCESS");
+      });
+    });
+  });
 
 module.exports = router;
