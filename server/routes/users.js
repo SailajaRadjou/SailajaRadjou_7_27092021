@@ -67,4 +67,10 @@ router.post("/login", async (req, res, next) => {
     
   });
 
+  router.get("/profileinfo/:id", async(req,res) => {
+    const id = req.params.id;
+    const profileinfo = await Users.findByPk(id, {attributes: { exclude: ["password"] }});
+    res.json(profileinfo);
+  })
+
 module.exports = router;
