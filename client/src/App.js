@@ -55,28 +55,34 @@ function App() {
           
           <nav className="navbar-expand-lg navbar-light bg-blue">
           <ul className="navbar-nav mr-auto">
-          <li><Link to={"/"}> Home Page</Link></li>
-          <li><Link to={"/createpost"}> Create A Post</Link></li>
+          
           { !authState.status ? (
             <>
             <li><Link to={"/login"}> Login</Link></li>
             <li> <Link to={"/signup"}>Signup</Link></li>
             </>
           ):(
-            <div>
-              <h3>Logged as :
-                {authState.username}
-              </h3>              
-              {authState.status && 
+            <>
+              <li><Link to={"/"}> Home Page</Link></li>
+              <li><Link to={"/createpost"}> Create A Post</Link></li>
+            </>
+          )} 
+          </ul>
+          <div>
+                           
+              {authState.status && (
+                <>
+                  <h3>Logged as :
+                  {authState.username}
+                  </h3> 
                   <button type="button"
                     className="btn btn-secondary btn-sm"
                     onClick={ logout }>
                     Logout
                   </button>
+                </>)
               }    
             </div>
-          )} 
-          </ul>
             
           </nav>
         </div>

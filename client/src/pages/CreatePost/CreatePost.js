@@ -1,38 +1,45 @@
 import React, {Fragment} from 'react';
+import { useContext, useEffect } from 'react';
 import axios from 'axios';
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
 import '../CreatePost/CreatePost.css';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../Helpers/AuthContext';
 
 function CreatePost() {
 
+    const { authState } = useContext(AuthContext);
+
     let history = useHistory();
+
     const initialValues = {
         title:"",
         postTextMsg:"",
-        userName:""
     };
+
+    useEffect(() => {
+        if (!localStorage.getItem("accessToken")) {
+          history.push("/login");
+        }
+    }, []);
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(),
         postTextMsg:Yup.string().required(),
-        userName:Yup.string().min(3).required()
     });
 
     const onSubmit = (data) => {
-        if(localStorage.getItem("accessToken")===null){
-            alert("login fist");
-        }
-        else{
-            axios.post("http://localhost:3001/posts", data)
-            .then((response) => {
-                console.log("Successfully Done ! ");
-                history.push("/");
-            });
-        }   
-       
+        axios
+        .post("http://localhost:3001/posts", data, {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          history.push("/");
+        });
     }   
+       
+   
 
     return (
         <Fragment>
@@ -55,13 +62,6 @@ function CreatePost() {
                                         id="inputCreatePost"
                                         name="postTextMsg"
                                         placeholder="Type your message"
-                                    /><br/>
-                                    <label>Your Name : </label>
-                                    <ErrorMessage name="userName" component="span" />
-                                    <Field
-                                        id="inputCreatePost"
-                                        name="userName"
-                                        placeholder="Your name"
                                     /><br/>
                                     <button type="submit">Send Message</button>
                                 </Form>
