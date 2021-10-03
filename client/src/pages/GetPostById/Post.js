@@ -7,6 +7,8 @@ function Post() {
 
   let {id} = useParams();
 
+  let history = useHistory();
+
   const [postObject, setPostObject] = useState({});
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -65,6 +67,17 @@ function Post() {
       });
   };
 
+  const deletePost = () => {
+    axios.delete(`http://localhost:3001/posts/${id}`,{
+        headers: {
+            accessToken: localStorage.getItem("accessToken")
+        }  
+    })
+    .then(() => {
+        alert("delete successfully");
+        history.push("/");
+    });
+  };
     return (
         <Fragment>
             <div className="container m-5 align-center">
@@ -93,7 +106,15 @@ function Post() {
                                 </div>
                                 <div>
                                     <button className="btn btn-primary" type="submit" onClick={addComment}>Comments</button>
-                                    <button className="btn btn-primary" type="submit">Like</button>
+                                    
+                                    {authState.username === postObject.userName && (
+                                        <button className="btn btn-primary"
+                                         type="submit"
+                                         onClick={() => {
+                                             deletePost(postObject.id);
+                                         }}>Supprimer</button>
+                                    )}
+                                    
                                 </div>   
                                 <div>
                                     {
@@ -104,8 +125,8 @@ function Post() {
                                                 <label>Username : {comment.userName}</label>
                                                  <input className="form-control" disabled={true}  placeholder={comment.commentBody} />
                                             </div>
-                                            <label>authuser:{comment.userName}</label>
-                                                {authState.userName === comment.userName && (
+                                            <label>authuser:{authState.username}</label>
+                                                {authState.username === comment.userName && (
                                                         <button onClick = {() => {
                                                             deleteComment(comment.id);
                                                         }}>

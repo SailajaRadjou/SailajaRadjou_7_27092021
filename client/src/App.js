@@ -11,6 +11,7 @@ import Profile from './pages/Profile/Profile';
 import { AuthContext } from './Helpers/AuthContext';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
     id: 0,
     status: false,
   });
+
+  let history = useHistory();
   
   useEffect(() => {
     axios.get('http://localhost:3001/auth/token', 
@@ -45,6 +48,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setAuthState({ username: "", id: 0, status: false });
+    
   };
 
   return (
