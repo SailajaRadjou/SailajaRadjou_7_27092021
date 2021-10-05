@@ -51,7 +51,7 @@ router.post("/login", async (req, res, next) => {
           console.log("req.body.username :" + username);
           console.log("Access Token user.js : "+accessToken);
           res.json({ token: accessToken, userName: username, id: user.id });
-          res.json(req.body.userName);
+          res.json(req.body);
          next();
     }
      

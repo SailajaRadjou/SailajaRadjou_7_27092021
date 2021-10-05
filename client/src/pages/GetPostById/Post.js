@@ -91,6 +91,7 @@ function Post() {
                                     {postObject.postTextMsg}
                                 </p>
                                 <a href="/#" className="card-link">{postObject.userName}</ a>
+                                <img src={postObject.postImage} className="img-fluid" alt="Responsive image" />
                             
                                 <div className="form-group shadow-textarea">
                                     <label htmlFor="exampleFormControlTextarea6">Comments : </label>

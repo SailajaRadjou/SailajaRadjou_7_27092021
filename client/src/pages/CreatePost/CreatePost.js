@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import { useContext, useEffect } from 'react';
 import axios from 'axios';
-import {Formik, Form, Field, ErrorMessage} from "formik";
+//import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
 import '../CreatePost/CreatePost.css';
 import { useHistory } from 'react-router-dom';
@@ -9,14 +9,16 @@ import { AuthContext } from '../../Helpers/AuthContext';
 
 function CreatePost() {
 
+    
+    const [title, setTitle] = React.useState();
+    const [textMsg, setTextMsg] = React.useState();
+    const [uploadFile, setUploadFile] = React.useState();
+
     const { authState } = useContext(AuthContext);
 
     let history = useHistory();
 
-    const initialValues = {
-        title:"",
-        postTextMsg:"",
-    };
+    
 
     useEffect(() => {
         if (!localStorage.getItem("accessToken")) {
@@ -24,21 +26,24 @@ function CreatePost() {
         }
     }, []);
 
-    const validationSchema = Yup.object().shape({
-        title: Yup.string().required(),
-        postTextMsg:Yup.string().required(),
-    });
+      
 
-    const onSubmit = (data) => {
+    const onSubmit = (event) => {
+        //console.log("data"+JSON.stringify(data));
+        event.preventDefault();
+        const dataArray = new FormData();
+    dataArray.append("title", title);
+    dataArray.append("postTextMsg", textMsg);
+    dataArray.append("image", uploadFile);
         axios
-        .post("http://localhost:3001/posts", data, {
-          headers: { accessToken: localStorage.getItem("accessToken") },
+        .post("http://localhost:3001/posts", dataArray, {
+          headers: { 'Content-Type': 'multipart/form-data',accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
           history.push("/");
         });
     }   
-       
+     
    
 
     return (
@@ -47,25 +52,30 @@ function CreatePost() {
                 <div className="row">
                     <div className="col">
                         <div className="card createPostPage">
-                            <Formik initialValues = {initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                                <Form className="form-group formContainer">
-                                    <label>Title : </label>
-                                    <ErrorMessage name="title" component="span" />
-                                    <Field                        
-                                        id="inputCreatePost"
-                                        name="title"
-                                        placeholder="Title here"
-                                    /><br/>
-                                    <label>Your Message : </label>
-                                    <ErrorMessage name="postTextMsg" component="span" />
-                                    <Field                        
-                                        id="inputCreatePost"
-                                        name="postTextMsg"
-                                        placeholder="Type your message"
-                                    /><br/>
-                                    <button type="submit">Send Message</button>
-                                </Form>
-                            </Formik>
+                           
+                         <form onSubmit={onSubmit}>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Title</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput"
+                                 placeholder="Example input" name="title"
+                                 onChange={(e) => setTitle(e.target.value)} />
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Post your message</label>
+                                <input type="text" class="form-control" 
+                                id="formGroupExampleInput2" placeholder="Another input"
+                                 name="postTextMsg"
+                                 onChange={(e) => setTextMsg(e.target.value)}/>
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Upload</label>
+                                <input type="file" class="form-control"
+                                name="image"
+                                 id="formGroupExampleInput2" placeholder="Another input"
+                                 onChange={(e) => setUploadFile(e.target.files[0])}/>
+                            </div>
+                            <button type="submit">Send Message</button>
+                            </form>
                         </div>
                     </div>
                 </div>

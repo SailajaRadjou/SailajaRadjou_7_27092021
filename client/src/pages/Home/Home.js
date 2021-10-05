@@ -6,6 +6,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { AuthContext } from "../../Helpers/AuthContext";
 import {Link} from 'react-router-dom';
 import '../Home/styles/Home.css';
+import { SliderValueLabel } from '@mui/material';
 
 function Home() {
     const [AllPosts, setAllPosts] = useState([]);
@@ -80,7 +81,8 @@ function Home() {
                                         <h5 className="card-title">{value.title}</h5>
                                         <p className="card-text">{value.postTextMsg}</p>
                                         
-                                    
+                                        <img src={value.postImage} className="img-fluid" alt="Responsive image" />
+
                                         <div className="form-group shadow-textarea">
                                             <label htmlFor="exampleFormControlTextarea6">Comments : </label>
                                             <textarea className="form-control z-depth-1"

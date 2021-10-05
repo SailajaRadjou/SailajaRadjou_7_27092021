@@ -1,8 +1,22 @@
 const express = require('express');
-
+const path = require('path');
 const router = express.Router();
 const {Posts, Likes, Users} = require('../models');
 const { validateToken } = require("../middlewares/AuthMiddleware");
+const multer = require('../middlewares/Multer_Config');
+
+/*var storage = multer.diskStorage({
+    destination: function(request, file, callback){
+        callback(null, './images')
+    },
+    
+    filename: function(request, file, callback){
+        console.log(file);
+        callback(null, file.fieldname+'-'+Date.now() + path.extname(file.originalname))
+    }
+})
+
+const upload = multer({storage : storage});*/
 
 router.get("/", validateToken, async (req, res) => {
     console.log("posts req user "+ req.user.id);
@@ -26,16 +40,21 @@ router.get('/byuserId/:id', async (req, res) => {
     res.json(allPosts);
 });
 
-router.post("/", validateToken, async (req, res) => {
-    
+router.post("/", multer, validateToken, async (req, res) => {
+    let varImage ="";
+    console.log("req.body.file : "+ JSON.stringify(req.body.postImage));
+    console.log("post req.body"+JSON.stringify(req.body));
     const userid = req.body.id;
     const user = await Users.findOne({where: { id: userid }});
     console.log("post user : "+user.userName);
-    console.log("post"+JSON.stringify(req.body));
     
-    const postMsg = await Posts.create({title: req.body.title, postTextMsg: req.body.postTextMsg, userName: user.userName, UserId:user.id});
+    varImage = `${req.protocol}://${req.get("host")}/images/${req.file.filename}` 
+    console.log("post user file : "+varImage);  
+    
+    const postMsg = await Posts.create({title: req.body.title, postTextMsg: req.body.postTextMsg, postImage: varImage, userName: user.userName, UserId:user.id});
     await postMsg.save();
     res.json(postMsg);
+   
 });
 
 router.delete("/:postId", validateToken, async(req, res) => {
