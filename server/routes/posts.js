@@ -5,18 +5,6 @@ const {Posts, Likes, Users} = require('../models');
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const multer = require('../middlewares/Multer_Config');
 
-/*var storage = multer.diskStorage({
-    destination: function(request, file, callback){
-        callback(null, './images')
-    },
-    
-    filename: function(request, file, callback){
-        console.log(file);
-        callback(null, file.fieldname+'-'+Date.now() + path.extname(file.originalname))
-    }
-})
-
-const upload = multer({storage : storage});*/
 
 router.get("/", validateToken, async (req, res) => {
     console.log("posts req user "+ req.user.id);

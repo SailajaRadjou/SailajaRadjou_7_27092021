@@ -2,6 +2,8 @@ import React, { Fragment, useState, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../Helpers/AuthContext";
+import jumbo_image from '../../images/icon-left-font-monochrome-black.png';
+import './login.css'
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -31,7 +33,8 @@ function Login() {
     return (
         <Fragment>
            <div className="container m-5 align-center">            
-                <div className="row">
+           
+           <div className="row">            
                     <div className="col">
                         <div className="card createPostPage">
                             <form className="formContainer">
