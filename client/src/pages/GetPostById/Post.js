@@ -78,6 +78,36 @@ function Post() {
         history.push("/");
     });
   };
+
+  const editPost = (option) => {
+      if(option === "title"){
+        let newTitle = prompt("Enter New Title : ");
+        axios.put(`http://localhost:3001/posts/title/${id}`,
+        {
+            newTitle: newTitle,
+            id: id,
+        },
+        {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }   
+        });
+        setPostObject({ ...postObject, title: newTitle });
+      }else{
+        let newTextMsg = prompt("Enter New Message : ");
+        axios.put(`http://localhost:3001/posts/postText/${id}`,
+        {
+            newTextMsg: newTextMsg,
+            id: id,
+        },
+        {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }   
+        });
+        setPostObject({ ...postObject, postTextMsg: newTextMsg });
+      }
+  }
     return (
         <Fragment>
             <div className="container m-5 align-center">
@@ -85,13 +115,22 @@ function Post() {
                     <div className="col">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">{postObject.title}</h5>
-                                <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p className="card-text">
-                                    {postObject.postTextMsg}
-                                </p>
-                                <a className="card-link">{postObject.userName}</ a>
-                                <img src={postObject.postImage} className="img-fluid" alt="Responsive image" />
+                               <div onClick={() => {
+                                   if(authState.username === postObject.userName){
+                                       editPost("title");
+                                    }
+                                    }}>
+                                    <h5 className="card-title">{postObject.title}</h5>
+                                    <h6 className="card-subtitle mb-2 text-muted">{postObject.userName}</h6>
+                                </div>
+                                <div onClick={() => {
+                                    if(authState.username === postObject.userName){
+                                        editPost("text")
+                                    }
+                                    }}>
+                                    <p className="card-text">{postObject.postTextMsg}</p>
+                                </div>
+                                <img src={postObject.postImage} className="img-fluid" alt="No Uploads" />
                             
                                 <div className="form-group shadow-textarea">
                                     <label htmlFor="exampleFormControlTextarea6">Comments : </label>

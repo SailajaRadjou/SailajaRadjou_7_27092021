@@ -80,8 +80,8 @@ function Home() {
                                     <div className="card-body" onClick={() => {history.push(`/post/${value.id}`)}}>
                                         <h5 className="card-title">{value.title}</h5>
                                         <p className="card-text">{value.postTextMsg}</p>
-                                        
-                                        <img src={value.postImage} className="img-fluid" alt="Responsive image" />                                                     
+                                        {(value.postImage!=="null" || value.postImage!=="undefined" ) &&
+                                        <img src={value.postImage} className="img-fluid" alt="No Uploads" /> }        
                                     </div>  
                                     <div>
                                         <div>

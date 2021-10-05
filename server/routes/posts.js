@@ -40,15 +40,34 @@ router.post("/", multer, validateToken, async (req, res) => {
     const userid = req.body.id;
     const user = await Users.findOne({where: { id: userid }});
     console.log("post user : "+user.userName);
-    
+    if(req.file){
     varImage = `${req.protocol}://${req.get("host")}/images/${req.file.filename}` 
     console.log("post user file : "+varImage);  
-    
+    }
     const postMsg = await Posts.create({title: req.body.title, postTextMsg: req.body.postTextMsg, postImage: varImage, userName: user.userName, UserId:user.id});
     await postMsg.save();
     res.json(postMsg);
    
 });
+
+//Modifying Message --- Title Part
+router.put("/title/:id", validateToken, async (req,res) => {
+    console.log("modify title body : "+ JSON.stringify(req.body));
+    const newTitle = req.body.newTitle;
+    console.log("modify title : "+ newTitle);
+    const id = req.params.id;
+    console.log("modify id : "+ req.params.id);
+    await Posts.update({title: req.body.newTitle} , {where: {id: id}});
+    res.json("newTitle : "+newTitle +" PostID "+ id);
+});
+
+//Modifying Message --- Message Part
+router.put("/postText/:id", validateToken, async (req,res) => {
+    const id = req.params.id;
+    await Posts.update({ postTextMsg: req.body.newTextMsg }, { where: { id: id } });
+     res.json(newTextMsg);
+});
+
 
 //Deleting message
 router.delete("/:postId", validateToken, async(req, res) => {
