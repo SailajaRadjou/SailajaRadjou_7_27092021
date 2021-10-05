@@ -90,7 +90,7 @@ function Post() {
                                 <p className="card-text">
                                     {postObject.postTextMsg}
                                 </p>
-                                <a href="/#" className="card-link">{postObject.userName}</ a>
+                                <a className="card-link">{postObject.userName}</ a>
                                 <img src={postObject.postImage} className="img-fluid" alt="Responsive image" />
                             
                                 <div className="form-group shadow-textarea">

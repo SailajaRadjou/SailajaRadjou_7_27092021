@@ -22,6 +22,18 @@ function Profile() {
         });
     }, []);
 
+    const deleteUser = () => {
+        axios.delete(`http://localhost:3001/auth/${id}`,{
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }  
+        })
+        .then(() => {
+            alert("User Account Deleted Successfully");
+            history.push("/signup");
+        });
+    }
+
     return (
         <Fragment>
             <div>
@@ -29,10 +41,16 @@ function Profile() {
                     <div className="card-body">
                         <h5 className="card-title"> Username: {username}</h5>
                         {authState.username === username && (
-                            <button className="btn btn-primary" type="submit"
-                                onClick={() => {
-                                    history.push("/changepassword");
-                                }}>Change Password</button>
+                            <>
+                                <button className="btn btn-primary" type="submit"
+                                    onClick={() => {
+                                        history.push("/changepassword");
+                                    }}>Change Password</button>
+                                <button className="btn btn-primary" type="submit"
+                                    onClick={() => {
+                                        deleteUser()
+                                    }}>Delete Account</button>
+                            </>        
                         )}
                         
                     </div>
@@ -46,10 +64,12 @@ function Profile() {
                                         <div className="card-body" onClick={() => {history.push(`/post/${value.id}`)}}>
                                             <h5 className="card-title">{value.title}</h5>
                                             <p className="card-text">{value.postTextMsg}</p>
-                                            <h6 className="card-subtitle mb-2">{value.userName}</h6>
+                                            <img src={value.postImage} className="img-fluid" alt="Responsive image" /> 
+                                            
                                                                                                                          
                                         </div>  
                                         <div>
+                                        <h6 className="card-subtitle mb-2">{value.userName}</h6>    
                                         <label className="card-text">&nbsp;&nbsp; {value.Likes.length} &nbsp;&nbsp;Likes </label> 
                                         </div>    
                                     </div>

@@ -26,7 +26,7 @@ router.post("/signup", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
     const { username, password } = req.body;
-  console.log(req.body);
+  console.log("Login body:"+ JSON.stringify(req.body));
     const user = await Users.findOne({ where: { userName: username } });
     console.log(user);
     if (!user) {
@@ -52,6 +52,7 @@ router.post("/login", async (req, res, next) => {
           console.log("Access Token user.js : "+accessToken);
           res.json({ token: accessToken, userName: username, id: user.id });
           res.json(req.body);
+          res.json(req.body.userName);
          next();
     }
      
@@ -88,9 +89,19 @@ router.post("/login", async (req, res, next) => {
           { password: hash },
           { where: { userName: user.userName } }
         );
-        res.json("SUCCESS");
+        res.json("PASSWORD CHANGED SUCCESSFULLY");
       });
     });
   });
+
+router.delete("/:UserId", validateToken, async(req, res) => {
+    const userId = req.params.UserId;
+    await Users.destroy({
+        where: {
+            id: userId,
+        },
+    });
+    res.json("User Deleted Successfully");
+});
 
 module.exports = router;

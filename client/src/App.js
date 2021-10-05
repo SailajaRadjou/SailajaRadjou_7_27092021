@@ -13,6 +13,7 @@ import { AuthContext } from './Helpers/AuthContext';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import moveToLogin from './pages/Login/Login.js';
 
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setAuthState({ username: "", id: 0, status: false });
-    
+    window.location.href = moveToLogin;
   };
 
   return (
