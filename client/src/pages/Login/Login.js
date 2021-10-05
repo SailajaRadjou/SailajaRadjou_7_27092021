@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../Helpers/AuthContext";
 import jumbo_image from '../../images/icon-left-font-monochrome-black.png';
-import './login.css'
+import './login.css';
+import logo from '../../images/icon-left-font-monochrome-black.png'
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -36,8 +37,9 @@ function Login() {
            
            <div className="row">            
                     <div className="col">
-                        <div className="card createPostPage">
-                            <form className="formContainer">
+                        <div className="card loginPage">
+                        <img src={logo} className="logo_display logo_shadow img-fluid" alt="Info Logo" />
+                            <form className="formContainer loginContainer">
                                 <div className="form-group">
                                     <label forhtml="inputUsername">Username : </label>
                                     <input type="text"
@@ -61,7 +63,7 @@ function Login() {
                                         }}
                                     />
                                 </div>
-                                <button type="submit" className="btn btn-primary" onClick={login}>Login</button>
+                                <button type="submit" className="btn btn-primary loginButton" onClick={login}>Login</button>
                             </form>
                         </div>
                     </div>

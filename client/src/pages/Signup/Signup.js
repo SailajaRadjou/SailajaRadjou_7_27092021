@@ -3,7 +3,8 @@ import axios from 'axios';
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
 import { useHistory } from "react-router-dom";
-
+import '../Login/login.css';
+import logo from '../../images/icon-left-font-monochrome-black.png'
 function Signup() {
        const initialValues = {
         userName:"",
@@ -40,11 +41,12 @@ function Signup() {
             <div className="container m-5 align-center">
                 <div className="row">
                     <div className="col">
-                        <div className="card createPostPage">
+                        <div className="card loginPage">
+                        <img src={logo} className="logo_display logo_shadow img-fluid" alt="Info Logo" />
                             <Formik initialValues = {initialValues}
                              onSubmit={onSubmit}
                               validationSchema={validationSchema}>
-                                <Form className="form-group formContainer">
+                                <Form className="form-group formContainer loginContainer">
                                     <label>Username : </label>
                                     <ErrorMessage name="userName" component="span" />
                                     <Field
@@ -62,7 +64,7 @@ function Signup() {
                                         placeholder="Password here"
                                        
                                     /><br/>
-                                    <button type="submit">SignUp</button>
+                                    <button type="submit" className="loginButton">SignUp</button>
                                 </Form>
                             </Formik>
                         </div>

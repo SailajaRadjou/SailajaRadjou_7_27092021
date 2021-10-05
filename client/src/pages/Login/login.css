@@ -1,10 +1,16 @@
-.login_display {
+.loginPage {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
+  height: 70vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.jumbotron_display {
-  background: url("../../images/icon.png");
-  background-size: cover;
-  height: 100%;
+.loginContainer {
+  border: 5px solid #f17d9a;
+}
+
+.loginButton {
+  background-color: #f58ca6 !important;
 }/*# sourceMappingURL=login.css.map */

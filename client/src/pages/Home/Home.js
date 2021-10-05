@@ -81,15 +81,7 @@ function Home() {
                                         <h5 className="card-title">{value.title}</h5>
                                         <p className="card-text">{value.postTextMsg}</p>
                                         
-                                        <img src={value.postImage} className="img-fluid" alt="Responsive image" />
-
-                                        <div className="form-group shadow-textarea">
-                                            <label htmlFor="exampleFormControlTextarea6">Comments : </label>
-                                            <textarea className="form-control z-depth-1"
-                                             id="exampleFormControlTextarea6"
-                                             rows="3" placeholder="Write something here..."></textarea>
-                                        </div>
-                                                                               
+                                        <img src={value.postImage} className="img-fluid" alt="Responsive image" />                                                     
                                     </div>  
                                     <div>
                                         <div>
