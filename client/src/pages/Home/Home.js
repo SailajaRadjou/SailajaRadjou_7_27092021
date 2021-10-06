@@ -83,19 +83,22 @@ function Home() {
                                         {(value.postImage!=="null" || value.postImage!=="undefined" ) &&
                                         <img src={value.postImage} className="img-fluid" alt="No Uploads" /> }        
                                     </div>  
-                                    <div>
-                                        <div>
+                                    <div className="likes_container">
+                                        <div className="user_container">
+                                            <label> Posted by : &nbsp;&nbsp;</label>
                                             <h6 className="card-subtitle mb-2 text-muted">
                                             <Link to={`/profile/${value.UserId}`}>
                                                     {value.userName}
                                             </Link>
                                             </h6>
-                                        </div>    
+                                        </div>  
+                                        <div className="likes_display">  
                                             <ThumbUpAltIcon
                                                 onClick = {() => {likeAPost(value.id)}}
                                                 className={!likedPosts.includes(value.id) ? "unLikeBtn" : "likeBtn"}
                                                 />
-                                            <label> {value.Likes.length} </label>
+                                            <label>&nbsp;&nbsp; {value.Likes.length} </label>
+                                        </div>    
                                     </div>    
                                 </div>
                             </div>

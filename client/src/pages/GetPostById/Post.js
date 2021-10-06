@@ -121,7 +121,10 @@ function Post() {
                                     }
                                     }}>
                                     <h5 className="card-title">{postObject.title}</h5>
+                                    <div className="user_container">
+                                    <label> Posted by : &nbsp;&nbsp;</label>
                                     <h6 className="card-subtitle mb-2 text-muted">{postObject.userName}</h6>
+                                    </div>
                                 </div>
                                 <div onClick={() => {
                                     if(authState.username === postObject.userName){

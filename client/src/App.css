@@ -42,13 +42,17 @@ body{
   object-fit: cover;
   border-radius: 1.5rem;
 }
-h1{
+h1,h5{
   color: black;
   font-size: 1.5rem;
 }
-h1{
+a{
+  font-weight: bolder !important;
+}
+p{
   color: black;
-  font-size: 1.0rem;
+  font-size: 1.3rem !important;
+  font-weight: 500 !important;
 }
 .navbar a {
   margin-left: 20px;
@@ -70,4 +74,8 @@ h1{
 .link_display{
   display: flex;
   justify-content: center;
+}
+
+.logout_button{
+ background-color:  rgb(228 153 172);
 }

@@ -7,3 +7,17 @@
     width: 75%;
     height: 25rem;
 }
+.likes_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.user_container{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+.likes_display{
+    display: flex;
+    
+}

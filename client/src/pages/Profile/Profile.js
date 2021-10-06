@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState, useContext} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from "../../Helpers/AuthContext";
+import './profile.css';
 function Profile() {
 
     let { id } = useParams();
@@ -37,7 +38,7 @@ function Profile() {
     return (
         <Fragment>
             <div>
-                <div className="card text-center m-5">
+                <div className="card text-center m-5 profile_display">
                     <div className="card-body">
                         <h5 className="card-title"> Username: {username}</h5>
                         {authState.username === username && (

@@ -28,10 +28,10 @@ function ChangePassword() {
             <div className="container m-5 align-center">            
                 <div className="row">
                     <div className="col">
-                        <div className="card createPostPage">
-                            <form className="formContainer">
+                        <div className="card loginPage">
+                            <form className="formContainer loginContainer">
                                 <div className="form-group">
-                                    <label for="formGroupExampleInput">Old Password : </label>
+                                    <label forhtml="formGroupExampleInput">Old Password : </label>
                                     <input type="text"
                                      className="form-control"
                                      id="formGroupExampleInput"
@@ -51,7 +51,7 @@ function ChangePassword() {
                                      }} />
                                 </div>
                                 <button type="submit"
-                                 class="btn btn-primary"
+                                 className="btn btn-primary loginButton"
                                  onClick={changePassword}>Modifier</button>
                             </form>
                         </div>

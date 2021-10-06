@@ -87,7 +87,7 @@ function App() {
                     {authState.username}
                     </h3> 
                     <button type="button"
-                      className="btn btn-secondary btn-sm"
+                      className="btn btn-sm logout_button"
                       onClick={ logout }>
                       Logout
                     </button>
