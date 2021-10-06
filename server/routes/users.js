@@ -96,12 +96,21 @@ router.post("/login", async (req, res, next) => {
 
 router.delete("/:UserId", validateToken, async(req, res) => {
     const userId = req.params.UserId;
-    await Users.destroy({
-        where: {
-            id: userId,
-        },
-    });
-    res.json("User Deleted Successfully");
+    const reqbody = JSON.stringify(req.body);
+    const user =await Users.findOne({where: { id : userId}})
+    console.log("user delete : "+JSON.stringify(user));
+    console.log("user delete : "+reqbody);
+    if((req.body.id !== userId) || (user.role !== 1)){
+      res.status(400).json({ message: 'Sorry ! You have no rights. You cannot delete this account!'});
+    }
+    else{
+     await Users.destroy({
+          where: {
+              id: userId,
+          },
+      });
+      res.json("User Deleted Successfully");
+    }  
 });
 
 module.exports = router;

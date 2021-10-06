@@ -22,7 +22,9 @@ router.post("/", validateToken, async (req, res) => {
 
 router.delete("/:commentId", validateToken, async (req, res) => {
     const commentId = req.params.commentId;
-    console.log(commentId);
+    console.log("Req body commentId : "+JSON.stringify(req.body));
+    console.log("commentId : "+commentId);
+   
     await Comments.destroy({
       where: {
         id: commentId,
@@ -30,6 +32,7 @@ router.delete("/:commentId", validateToken, async (req, res) => {
     });
   
     res.json("DELETED SUCCESSFULLY");
+  
   });
 
 

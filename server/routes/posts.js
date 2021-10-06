@@ -74,10 +74,12 @@ router.delete("/:postId", validateToken, async(req, res) => {
     const postId = req.params.postId;
     console.log("Delete req.body : "+ JSON.stringify(req.body));
     console.log("Delete PostId : "+ postId);
+    const user =await Users.findOne({where: { id : req.body.id}})
+    console.log("user role view : "+ JSON.stringify(user));
     const post = await Posts.findOne({where: { id: postId }});
     console.log("Delete PostId view : "+ JSON.stringify(post));
-    if(req.body.id !== post.UserId){
-        throw 'Sorry ! You have no rights. You cannot delete others shared ';
+    if((req.body.id !== post.UserId) || (user.role !== 1)){
+        res.status(400).json({ message: 'Sorry ! You have no rights. You cannot delete others shared  !'});
     }
     else{
         const filename = post.postImage.split('/images/')[1];
