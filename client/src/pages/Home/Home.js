@@ -1,22 +1,29 @@
 import React, {Fragment} from 'react';
 import axios from 'axios';
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import { AuthContext } from "../../Helpers/AuthContext";
 import {Link} from 'react-router-dom';
 import '../Home/styles/Home.css';
-import { SliderValueLabel } from '@mui/material';
 
 function Home() {
     const [AllPosts, setAllPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
 
-    const {authState} = useContext(AuthContext);
-
-
     let history = useHistory();
-
+    /*fetch('http://localhost:3001/auth/profileinfo/2').then((response) => {
+        response = response.json();
+        response.then((result) => {
+           
+        })
+    }, []);*/
+    fetch('http://localhost:3001/auth/profileinfo/4')
+    .then((response) => {
+        return response.json();
+    })
+    .then((result) => {
+        window.localStorage.setItem('admin',JSON.stringify(result));
+    })
 
     useEffect(() => {
 

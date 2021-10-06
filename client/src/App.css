@@ -2,6 +2,7 @@
 .App {
   font-family: 'Roboto', sans-serif;
   width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,6 +24,15 @@ body{
 }
 
 /* NAVBAR */
+
+.mr-auto{
+  margin-right: 0 !important;
+}
+
+.navbar-collapse{
+  justify-content: flex-end !important;
+}
+
 .navbar_display{
   display: flex;
 }
@@ -36,7 +46,7 @@ body{
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
 }
-.logo_display{
+/*.logo_display{
   width:200px;
   height : 60px;
   object-fit: cover;
@@ -46,7 +56,7 @@ h1,h5{
   color: black;
   font-size: 1.5rem;
 }
-a{
+.navlink{
   font-weight: bolder !important;
 }
 p{
@@ -63,7 +73,7 @@ p{
   align-items: flex-end;
   justify-content: center;
   width: 100%;
-}
+}*/
 
 .nav_link_display{
   font-size: 1.3rem;

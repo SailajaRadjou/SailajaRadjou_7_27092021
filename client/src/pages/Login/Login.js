@@ -2,7 +2,6 @@ import React, { Fragment, useState, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../Helpers/AuthContext";
-import jumbo_image from '../../images/icon-left-font-monochrome-black.png';
 import './login.css';
 import logo from '../../images/icon-left-font-monochrome-black.png'
 

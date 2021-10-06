@@ -1,11 +1,8 @@
-import React, {Fragment, useState} from 'react';
-import { useContext, useEffect } from 'react';
+import React, {Fragment} from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
-//import {Formik, Form, Field, ErrorMessage} from "formik";
-import * as Yup from 'yup';
 import '../CreatePost/CreatePost.css';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../Helpers/AuthContext';
 
 function CreatePost() {
 
@@ -14,27 +11,20 @@ function CreatePost() {
     const [textMsg, setTextMsg] = React.useState();
     const [uploadFile, setUploadFile] = React.useState();
 
-    const { authState } = useContext(AuthContext);
-
     let history = useHistory();
-
-    
 
     useEffect(() => {
         if (!localStorage.getItem("accessToken")) {
           history.push("/login");
         }
-    }, []);
-
-      
+    }, []);      
 
     const onSubmit = (event) => {
-        //console.log("data"+JSON.stringify(data));
         event.preventDefault();
         const dataArray = new FormData();
-    dataArray.append("title", title);
-    dataArray.append("postTextMsg", textMsg);
-    dataArray.append("image", uploadFile);
+        dataArray.append("title", title);
+        dataArray.append("postTextMsg", textMsg);
+        dataArray.append("image", uploadFile);
         axios
         .post("http://localhost:3001/posts", dataArray, {
           headers: { 'Content-Type': 'multipart/form-data',accessToken: localStorage.getItem("accessToken") },
@@ -42,9 +32,7 @@ function CreatePost() {
         .then((response) => {
           history.push("/");
         });
-    }   
-     
-   
+    }     
 
     return (
         <Fragment>

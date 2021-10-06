@@ -13,6 +13,8 @@ function Post() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
+  let userRole = JSON.parse(localStorage.getItem('admin'));
+
   const {authState} = useContext(AuthContext);
 
   useEffect(() => {
@@ -152,7 +154,7 @@ function Post() {
                                 <div>
                                     <button className="btn btn-primary" type="submit" onClick={addComment}>Comments</button>
                                     
-                                    {authState.username === postObject.userName && (
+                                    {((authState.username === postObject.userName) || (userRole.userName === authState.username)) && (
                                         <button className="btn btn-primary"
                                          type="submit"
                                          onClick={() => {
@@ -171,7 +173,7 @@ function Post() {
                                                  <input className="form-control" disabled={true}  placeholder={comment.commentBody} />
                                             </div>
                                             <label>authuser:{authState.username}</label>
-                                                {authState.username === comment.userName && (
+                                                {((authState.username === comment.userName) || (userRole.userName === authState.username)) && (
                                                         <button onClick = {() => {
                                                             deleteComment(comment.id);
                                                         }}>

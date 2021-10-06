@@ -1,5 +1,6 @@
 import './App.css';
-import logo from './images/icon-left-font-monochrome-black.png'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navbar, Nav } from 'react-bootstrap'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Home from './pages/Home/Home';
 import CreatePost from './pages/CreatePost/CreatePost';
@@ -13,8 +14,6 @@ import { AuthContext } from './Helpers/AuthContext';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import moveToLogin from './pages/Login/Login.js';
-
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -50,53 +49,44 @@ function App() {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setAuthState({ username: "", id: 0, status: false });
-    window.location.href = moveToLogin;
+    
   };
 
   return (
     <div className="App">
       <AuthContext.Provider value={{ authState, setAuthState}}>
       <Router>
-        <nav className="col navbar navbar-expand-lg navbar-dark navbar_display">
-          <div className="container-fluid navbar_display">
-            <img src={logo} className="logo_display logo_shadow img-fluid" alt="Info Logo" />
-            <h1 className="logo_title">&nbsp;&nbsp;Spécialisée dans la grande distribution&nbsp;&nbsp;</h1>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div id="navbarCollapse" className="collapse navbar-collapse link_display">
-              <ul className="navbar-nav navbar_override">
-                { !authState.status ? (
-                    <>
-                    <li className="nav-item active"><Link to={"/login"} className="nav-link nav_link_display"> Login</Link></li>
-                    <li className="nav-item"> <Link to={"/signup"} className="nav-link nav_link_display">Signup</Link></li>
-                    </>
-                  ):(
-                    <>
-                      <li className="nav-item"><Link to={"/"} className="nav-link nav_link_display"> Home Page</Link></li>
-                      <li className="nav-item"><Link to={"/createpost"} className="nav-link nav_link_display"> Create A Post</Link></li>
-                    </>
-                  )} 
-                </ul>
-            </div>
-            <div className="ms-auto">
-                            
+        <Navbar bg="light" variant={"light"} expand="lg">
+          <Navbar.Brand>
+            Groupomania  --  Spécialisée dans la grande distribution&nbsp;&nbsp;
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav className="my-2 my-lg-0" navbarScroll>
+              { !authState.status ? (
+                <>
+                  <Nav.Link as={Link} to={"/login"} className="navlink">Login</Nav.Link>
+                  <Nav.Link as={Link} to={"/signup"}>Signup</Nav.Link>
+                </>
+                ):(
+                <>
+                  <Nav.Link as={Link} to={"/"}>Home Page</Nav.Link>
+                  <Nav.Link as={Link} to={"/createpost"}>Create A Post</Nav.Link>
+                </>
+              )}  
+              <div className="ms-auto">
                 {authState.status && (
                   <div className="logger_container">
-                    <h4>Logged as :
-                    {authState.username}
-                    </h4> 
-                    <button type="button"
-                      className="btn btn-sm logout_button"
-                      onClick={ logout }>
+                    <h4>Logged as : {authState.username}</h4> 
+                    <button type="button" className="btn btn-sm logout_button" onClick={ logout }>
                       Logout
                     </button>
                   </div>)
                 }    
               </div>
-          </div>
-        </nav>    
-                     
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
         <Switch>
           <Route path="/" exact component = { Home } />
           <Route path="/createpost" exact component = { CreatePost } />
