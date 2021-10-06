@@ -68,6 +68,8 @@ function Post() {
   };
 
   const deletePost = () => {
+    var result = window.confirm("Do you want to delete the post?");
+    if(result){
     axios.delete(`http://localhost:3001/posts/${id}`,{
         headers: {
             accessToken: localStorage.getItem("accessToken")
@@ -78,7 +80,7 @@ function Post() {
         history.push("/");
     });
   };
-
+};
   const editPost = (option) => {
       if(option === "title"){
         let newTitle = prompt("Enter New Title : ");

@@ -7,9 +7,13 @@ module.exports = (sequelize, DataTypes) => {
         password: {
             type: DataTypes.STRING,
             allowNull: false
+        },     
+        role: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         }        
     });
-
+    
     Users.associate = (models) => {
         Users.hasMany(models.Likes, {
             onDelete: "cascade",

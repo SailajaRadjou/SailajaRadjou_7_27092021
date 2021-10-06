@@ -57,8 +57,8 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={{ authState, setAuthState}}>
       <Router>
-        <nav className="col navbar navbar-expand-lg navbar-dark">
-          <div className="container-fluid">
+        <nav className="col navbar navbar-expand-lg navbar-dark navbar_display">
+          <div className="container-fluid navbar_display">
             <img src={logo} className="logo_display logo_shadow img-fluid" alt="Info Logo" />
             <h1 className="logo_title">&nbsp;&nbsp;Spécialisée dans la grande distribution&nbsp;&nbsp;</h1>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,13 +68,13 @@ function App() {
               <ul className="navbar-nav navbar_override">
                 { !authState.status ? (
                     <>
-                    <li className="nav-item active"><Link to={"/login"} className="nav-link"> Login</Link></li>
-                    <li className="nav-item"> <Link to={"/signup"} className="nav-link">Signup</Link></li>
+                    <li className="nav-item active"><Link to={"/login"} className="nav-link nav_link_display"> Login</Link></li>
+                    <li className="nav-item"> <Link to={"/signup"} className="nav-link nav_link_display">Signup</Link></li>
                     </>
                   ):(
                     <>
-                      <li className="nav-item"><Link to={"/"} className="nav-link"> Home Page</Link></li>
-                      <li className="nav-item"><Link to={"/createpost"} className="nav-link"> Create A Post</Link></li>
+                      <li className="nav-item"><Link to={"/"} className="nav-link nav_link_display"> Home Page</Link></li>
+                      <li className="nav-item"><Link to={"/createpost"} className="nav-link nav_link_display"> Create A Post</Link></li>
                     </>
                   )} 
                 </ul>
@@ -82,16 +82,16 @@ function App() {
             <div className="ms-auto">
                             
                 {authState.status && (
-                  <>
-                    <h3>Logged as :
+                  <div className="logger_container">
+                    <h4>Logged as :
                     {authState.username}
-                    </h3> 
+                    </h4> 
                     <button type="button"
                       className="btn btn-sm logout_button"
                       onClick={ logout }>
                       Logout
                     </button>
-                  </>)
+                  </div>)
                 }    
               </div>
           </div>

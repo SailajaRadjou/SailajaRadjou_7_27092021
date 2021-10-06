@@ -24,6 +24,8 @@ function Profile() {
     }, []);
 
     const deleteUser = () => {
+        var result = window.confirm("Do you want to delete your account permenently?");
+        if(result){
         axios.delete(`http://localhost:3001/auth/${id}`,{
             headers: {
                 accessToken: localStorage.getItem("accessToken")
@@ -33,8 +35,8 @@ function Profile() {
             alert("User Account Deleted Successfully");
             history.push("/signup");
         });
-    }
-
+        }
+    }    
     return (
         <Fragment>
             <div>
