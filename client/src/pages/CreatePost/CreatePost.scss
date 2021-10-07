@@ -46,7 +46,7 @@
     color: red;
   }
 
-  @media screen and (min-width : 300px) and (max-width : 700px)
+@media screen and (min-width : 300px) and (max-width : 700px)
   {
       html, body
       {
@@ -57,3 +57,10 @@
         width: 390px;
       }  
   }
+
+@media screen and (min-width : 700px) and (max-width : 1025px)
+{
+  .formContainer {
+    width: 700px;
+  } 
+}

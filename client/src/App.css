@@ -40,7 +40,7 @@ body{
 .navbar {
   width: 100%;
  
-  background-color: rgb(228, 153, 172);
+  background: rgb(228, 153, 172) !important;
   display: flex;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
@@ -61,6 +61,7 @@ h1,h5{
   color: black;
   font-size: 1.5rem;
 }
+
 /*.navlink{
   font-weight: bolder !important;
 }

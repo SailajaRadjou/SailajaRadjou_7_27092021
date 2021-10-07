@@ -1,3 +1,8 @@
 .profile_display {
   width: auto;
+}
+
+.profile_container {
+  margin: 0 !important;
+  margin-bottom: 3rem !important;
 }/*# sourceMappingURL=profile.css.map */

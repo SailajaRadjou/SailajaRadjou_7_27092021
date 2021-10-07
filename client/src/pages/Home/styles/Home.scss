@@ -28,3 +28,19 @@
         height: 25rem;
     }  
 }
+
+/* Responsive pour Tablettes*/
+@media screen and (min-width : 700px) and (max-width : 1025px)
+{
+    html, body
+    {
+        overflow-x: hidden;
+    }
+    body 
+    {
+        position: relative;
+    }
+    .card{
+        width: 100%;
+    }
+}    

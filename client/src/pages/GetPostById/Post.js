@@ -117,7 +117,7 @@ function Post() {
             <div className="container m-5 align-center">
                 <div className="row">
                     <div className="col">
-                        <div className="card">
+                        <div className="card getOnePoast_display">
                             <div className="card-body">
                                <div onClick={() => {
                                    if(authState.username === postObject.userName){

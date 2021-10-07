@@ -39,25 +39,25 @@ function CreatePost() {
             <div className="container m-5 align-center">
                 <div className="row">
                     <div className="col">
-                        <div className="card createPostPage">
+                        <div className="card createPostPage loginPage">
                            
-                         <form onSubmit={onSubmit}>
-                            <div class="form-group">
+                         <form className="formContainer loginContainer" onSubmit={onSubmit}>
+                            <div className="form-group">
                                 <label for="formGroupExampleInput">Title</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput"
+                                <input type="text" className="form-control" id="formGroupExampleInput"
                                  placeholder="Example input" name="title"
                                  onChange={(e) => setTitle(e.target.value)} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="formGroupExampleInput2">Post your message</label>
-                                <input type="text" class="form-control" 
+                                <input type="text" className="form-control" 
                                 id="formGroupExampleInput2" placeholder="Another input"
                                  name="postTextMsg"
                                  onChange={(e) => setTextMsg(e.target.value)}/>
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="formGroupExampleInput2">Upload</label>
-                                <input type="file" class="form-control"
+                                <input type="file" className="form-control"
                                 name="image"
                                  id="formGroupExampleInput2" placeholder="Another input"
                                  onChange={(e) => setUploadFile(e.target.files[0])}/>

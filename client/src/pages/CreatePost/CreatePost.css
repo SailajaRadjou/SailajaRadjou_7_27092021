@@ -54,4 +54,9 @@ span {
   .formContainer {
     width: 390px;
   }
+}
+@media screen and (min-width: 700px) and (max-width: 1025px) {
+  .formContainer {
+    width: 700px;
+  }
 }/*# sourceMappingURL=CreatePost.css.map */

@@ -60,7 +60,7 @@ function Profile() {
                 </div>
                 {allPosts.map((value, key) => {
                     return (
-                        <div key={key} className="container m-5 align-center">
+                        <div key={key} className="container m-5 align-center profile_container">
                             <div className="row">
                                 <div className="col">
                                     <div className="card">
@@ -69,7 +69,7 @@ function Profile() {
                                             <p className="card-text">{value.postTextMsg}</p>
                                             <img src={value.postImage} className="img-fluid" alt="No Uploads" /> 
                                         </div>  
-                                        <div>
+                                        <div className="likes_container">
                                         <h6 className="card-subtitle mb-2">{value.userName}</h6>    
                                         <label className="card-text">&nbsp;&nbsp; {value.Likes.length} &nbsp;&nbsp;Likes </label> 
                                         </div>    
