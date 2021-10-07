@@ -1,8 +1,8 @@
 
 .loginPage {
     font-family: Arial, Helvetica, sans-serif;
-    width: 100vw;
-    height: 70vh;
+    width: auto;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,3 +15,7 @@
   .loginButton{
       background-color: rgb(245, 140, 166) !important;
   }
+
+  .img-logo {
+    height: 100px !important;
+}

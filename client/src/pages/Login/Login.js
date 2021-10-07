@@ -37,7 +37,7 @@ function Login() {
            <div className="row">            
                     <div className="col">
                         <div className="card loginPage">
-                        <img src={logo} className="logo_display logo_shadow img-fluid" alt="Info Logo" />
+                        <img src={logo} className="logo_display logo_shadow img-fluid img-logo" alt="Info Logo" />
                             <form className="formContainer loginContainer">
                                 <div className="form-group">
                                     <label forhtml="inputUsername">Username : </label>

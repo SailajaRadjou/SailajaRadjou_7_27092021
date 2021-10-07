@@ -22,4 +22,11 @@
 
 .likes_display {
   display: flex;
+}
+
+@media screen and (min-width: 300px) and (max-width: 700px) {
+  .card {
+    width: auto;
+    height: 25rem;
+  }
 }/*# sourceMappingURL=Home.css.map */

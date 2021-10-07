@@ -58,7 +58,7 @@ function App() {
       <Router>
         <Navbar bg="light" variant={"light"} expand="lg">
           <Navbar.Brand>
-            Groupomania  --  Spécialisée dans la grande distribution&nbsp;&nbsp;
+            Groupomania  --  Réseau social d'entreprise&nbsp;&nbsp;
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">

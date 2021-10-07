@@ -42,11 +42,11 @@ function Signup() {
                 <div className="row">
                     <div className="col">
                         <div className="card loginPage">
-                        <img src={logo} className="logo_display logo_shadow img-fluid" alt="Info Logo" />
+                        <img src={logo} className="logo_display logo_shadow img-fluid img-logo" alt="Info Logo" />
                             <Formik initialValues = {initialValues}
                              onSubmit={onSubmit}
                               validationSchema={validationSchema}>
-                                <Form className="form-group formContainer loginContainer">
+                                <Form className="formContainer loginContainer">
                                     <label>Username : </label>
                                     <ErrorMessage name="userName" component="span" />
                                     <Field
