@@ -13,12 +13,15 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0
         }        
     });
-    
+    //creating with associations
     Users.associate = (models) => {
         Users.hasMany(models.Likes, {
             onDelete: "cascade",
         });
         Users.hasMany(models.Posts, {
+            onDelete: "cascade",
+        });
+        Users.hasMany(models.Comments, {
             onDelete: "cascade",
         });
     }

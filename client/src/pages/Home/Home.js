@@ -17,7 +17,7 @@ function Home() {
            
         })
     }, []);*/
-    fetch('http://localhost:3001/auth/profileinfo/4')
+    fetch('http://localhost:3001/auth/profileinfo/1')
     .then((response) => {
         return response.json();
     })
