@@ -67,7 +67,8 @@ function Profile() {
                                         <div className="card-body" onClick={() => {history.push(`/post/${value.id}`)}}>
                                             <h5 className="card-title">{value.title}</h5>
                                             <p className="card-text">{value.postTextMsg}</p>
-                                            <img src={value.postImage} className="img-fluid" alt="No Uploads" /> 
+                                            {(value.postImage!=="") &&                                       
+                                            <img src={value.postImage} className="img-fluid" alt="No Uploads" />  }
                                         </div>  
                                         <div className="likes_container">
                                         <h6 className="card-subtitle mb-2">{value.userName}</h6>    

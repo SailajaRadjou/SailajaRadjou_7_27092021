@@ -55,15 +55,16 @@ function Post() {
       
   };
 
-  const deleteComment = (id) => {
+  const deleteComment = (cid) => {
+      alert(cid);
     axios
-      .delete(`http://localhost:3001/comments/${id}`, {
+      .delete(`http://localhost:3001/comments/${cid}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
         setComments(
           comments.filter((val) => {
-            return val.id != id;
+            return val.id != cid;
           })
         );
       });
@@ -137,7 +138,9 @@ function Post() {
                                     }}>
                                     <p className="card-text">{postObject.postTextMsg}</p>
                                 </div>
-                                <img src={postObject.postImage} className="img-fluid" alt="No Uploads" />
+                                {(postObject.postImage!=="") &&
+                                        <img src={postObject.postImage} className="img-fluid" alt="No Uploads" />}
+                                
                             
                                 <div className="form-group shadow-textarea">
                                     <label htmlFor="exampleFormControlTextarea6">Comments : </label>
@@ -168,7 +171,7 @@ function Post() {
                                         comments.map((comment, key) => {
                                         return(
                                             <div>
-                                            <div className="m-2" key={key}>
+                                            <div className="m-2">
                                                 <label>Username : {comment.userName}</label>
                                                  <input className="form-control" disabled={true}  placeholder={comment.commentBody} />
                                             </div>
@@ -177,7 +180,7 @@ function Post() {
                                                         <button onClick = {() => {
                                                             deleteComment(comment.id);
                                                         }}>
-                                                            Supprimer
+                                                            Supprimer 
                                                         </button>
                                                     )}
                                             

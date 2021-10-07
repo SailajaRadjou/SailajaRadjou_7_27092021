@@ -4,6 +4,7 @@ const {Users} = require('../models');
 const bcrypt = require('bcrypt');
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
+require('dotenv').config();
 
 router.post("/signup", async (req, res, next) => {
     const { userName, password } = req.body;
@@ -43,7 +44,7 @@ router.post("/login", async (req, res, next) => {
     {
         const accessToken = sign(
             { userName: user.username, id: user.id },
-            'RANDOM_TOKEN_SECRET'
+            process.env.RANDOM_TOKEN_SECRET
           );
           const username=user.userName;
           req.body.userName=username;
@@ -95,12 +96,13 @@ router.post("/login", async (req, res, next) => {
   });
 
 router.delete("/:UserId", validateToken, async(req, res) => {
-    const userId = req.params.UserId;
-    const reqbody = JSON.stringify(req.body);
-    const user =await Users.findOne({where: { id : userId}})
-    console.log("user delete : "+JSON.stringify(user));
-    console.log("user delete : "+reqbody);
-    if((req.body.id !== userId) || (user.role !== 1)){
+  const userId = req.params.UserId;
+  console.log("user delete req.params.UserId: "+userId);
+  
+  const user =await Users.findOne({where: { id : userId}})
+  console.log("user delete : "+JSON.stringify(user));
+  console.log("user delete : "+req.body.id);
+    if((req.body.id !== user.id) && (user.role !== 1)){
       res.status(400).json({ message: 'Sorry ! You have no rights. You cannot delete this account!'});
     }
     else{

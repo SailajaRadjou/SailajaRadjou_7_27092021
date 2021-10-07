@@ -1,10 +1,15 @@
 const express = require('express');
+// utilisation du module 'helmet' pour la sécurité en protégeant l'application de certaines vulnérabilités
+const helmet = require("helmet");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+//Helmet nous aide à sécuriser nos applications Express en définissant différentes en-têtes HTTP
+app.use(helmet());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
