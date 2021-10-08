@@ -32,7 +32,7 @@ function ChangePassword() {
                             <form className="formContainer loginContainer">
                                 <div className="form-group">
                                     <label forhtml="formGroupExampleInput">Old Password : </label>
-                                    <input type="text"
+                                    <input type="password"
                                      className="form-control"
                                      id="formGroupExampleInput"
                                      placeholder="Enter your old password...."
@@ -42,7 +42,7 @@ function ChangePassword() {
                                 </div>
                                 <div className="form-group">
                                     <label for="formGroupExampleInput2">New Password : </label>
-                                    <input type="text"
+                                    <input type="password"
                                      className="form-control"
                                      id="formGroupExampleInput2"
                                      placeholder="Enter your old password...."

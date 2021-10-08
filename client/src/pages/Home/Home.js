@@ -11,21 +11,17 @@ function Home() {
     const [likedPosts, setLikedPosts] = useState([]);
 
     let history = useHistory();
-    /*fetch('http://localhost:3001/auth/profileinfo/2').then((response) => {
-        response = response.json();
-        response.then((result) => {
-           
-        })
-    }, []);*/
-    fetch('http://localhost:3001/auth/profileinfo/1')
-    .then((response) => {
-        return response.json();
-    })
-    .then((result) => {
-        window.localStorage.setItem('admin',JSON.stringify(result));
-    })
+    
+    
 
     useEffect(() => {
+        fetch('http://localhost:3001/auth/profileinfo/1')
+        .then((response) => {
+            return response.json();
+        })
+        .then((result) => {
+            window.localStorage.setItem('admin',JSON.stringify(result));
+        });
 
         if (!localStorage.getItem("accessToken")) {
             history.push("/login");
