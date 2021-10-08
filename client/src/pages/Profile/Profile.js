@@ -46,11 +46,11 @@ function Profile() {
                         <h5 className="card-title"> Username: {username}</h5>
                         {((authState.username === username) || (userRole.userName === authState.username)) && 
                             <>
-                                <button className="btn btn-primary" type="submit"
+                                <button className="btn btn-primary loginButton" type="submit"
                                     onClick={() => {
                                         history.push("/changepassword");
                                     }}>Change Password</button>
-                                <button className="btn btn-primary" type="submit"
+                                <button className="btn btn-primary loginButton" type="submit"
                                     onClick={() => {
                                         deleteUser()
                                     }}>Delete Account</button>

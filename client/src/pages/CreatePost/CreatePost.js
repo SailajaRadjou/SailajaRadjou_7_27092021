@@ -62,7 +62,7 @@ function CreatePost() {
                                  id="formGroupExampleInput2" placeholder="Another input"
                                  onChange={(e) => setUploadFile(e.target.files[0])}/>
                             </div>
-                            <button type="submit">Send Message</button>
+                            <button type="submit" className="loginButton">Send Message</button>
                             </form>
                         </div>
                     </div>
