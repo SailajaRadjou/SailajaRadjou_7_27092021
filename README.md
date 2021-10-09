@@ -31,6 +31,15 @@ Clonez ce repository.
   * Tapez la commande suivante : "npm start"
   
   Rendez-vous sur http://localhost:3000/
+
+ ### Base de données
+  Se connecter au serveur MySql de votre choix.
+
+  Exécuter la commande :
+ 
+      CREATE DATABASE groupomaniadb;
+
+Vérifiez les identifiants dans le fichier config.json du dossier Backend
   
   
 ### Fonctionnalités implémentées

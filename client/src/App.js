@@ -14,7 +14,6 @@ import { AuthContext } from './Helpers/AuthContext';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
 
-
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
@@ -53,7 +52,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setAuthState({ username: "", id: 0, role:0, status: false });
-    
+   
   };
 
   return (
@@ -92,14 +91,14 @@ function App() {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route path="/" exact component = { Home } />
-          <Route path="/createpost" exact component = { CreatePost } />
-          <Route path="/post/:id" exact component = { Post } />
-          <Route path="/signup" exact component = { Signup } />
-          <Route path="/login" exact component = { Login } />
-          <Route path="/profile/:id" exact component = { Profile } />
-          <Route path="/changepassword" exact component = { ChangePassword } />
-          <Route path="*" exact component = { PageNotFound } />
+          <Route exact path="/" component = { Home } />
+          <Route path="/createpost" component = { CreatePost } />
+          <Route path="/post/:id" component = { Post } />
+          <Route path="/signup" component = { Signup } />
+          <Route path="/login" component = { Login } />
+          <Route path="/profile/:id" component = { Profile } />
+          <Route path="/changepassword" component = { ChangePassword } />
+          <Route path="*" component = { PageNotFound } />
         </Switch>
       </Router>
       </AuthContext.Provider>
