@@ -1,1 +1,9 @@
-{"version":3,"sources":["Post.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;AACJ;;AACA;EACI,8BAAA;AAEJ","file":"Post.css"}
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA;EACD,MAAM,EAAE,IAAI;CACf;;AACD,AAAA,oBAAoB,CAAA;EAChB,aAAa,EAAE,eAAe;CACjC",
+    "sources": [
+        "Post.scss"
+    ],
+    "names": [],
+    "file": "Post.css"
+}

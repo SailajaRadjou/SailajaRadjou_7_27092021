@@ -1,1 +1,9 @@
-{"version":3,"sources":["profile.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;AACJ;;AAEA;EACI,oBAAA;EACA,8BAAA;AACJ","file":"profile.css"}
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAA;EACZ,KAAK,EAAC,IAAI;CACb;;AAED,AAAA,kBAAkB,CAAA;EACd,MAAM,EAAE,YAAY;EACpB,aAAa,EAAE,eAAe;CACjC",
+    "sources": [
+        "profile.scss"
+    ],
+    "names": [],
+    "file": "profile.css"
+}
