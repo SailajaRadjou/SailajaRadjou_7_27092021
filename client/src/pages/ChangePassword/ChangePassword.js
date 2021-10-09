@@ -1,10 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import axios from 'axios';
-
+import { useHistory } from "react-router-dom";
 function ChangePassword() {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    const changePassword = () => {
+    let history = useHistory();
+    const changePassword = (e) => {
+        e.preventDefault();
         axios.put("http://localhost:3001/auth/changepassword",
             {
             oldPassword: oldPassword,
@@ -17,8 +19,13 @@ function ChangePassword() {
             }
             )
             .then((response) => {
-            if (response.data.error) {
+                console.log("change password response "+JSON.stringify(response));
+            if (response.data && response.data.error) {
             alert(response.data.error);
+            }
+            else{
+                console.log("changed");
+                history.push("/");
             }
         });
     };

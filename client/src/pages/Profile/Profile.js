@@ -12,6 +12,7 @@ function Profile() {
     const [allPosts, setAllPosts] = useState([]);
     
     useEffect(() => {
+        console.log("authstate user : "+JSON.stringify(authState));
         axios.get(`http://localhost:3001/auth/profileinfo/${id}`)
         .then((response) => {
             setUsername(response.data.userName);

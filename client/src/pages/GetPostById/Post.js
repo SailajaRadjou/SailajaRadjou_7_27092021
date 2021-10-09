@@ -45,9 +45,8 @@ function Post() {
             console.log("response.data.error"+response.data.error);
             
           } else 
-           {             
-                const commentToAdd = { commentBody: newComment, userName: response.data.userName };
-                setComments([...comments, commentToAdd]);
+           {    
+                setComments([...comments, response.data]);
                 setNewComment("");
           }
       })

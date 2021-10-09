@@ -13,6 +13,7 @@ import ChangePassword from './pages/ChangePassword/ChangePassword';
 import { AuthContext } from './Helpers/AuthContext';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -22,7 +23,7 @@ function App() {
     status: false,
   });
 
-  
+  let history = useHistory();
   
   useEffect(() => {
     axios.get('http://localhost:3001/auth/token', 
@@ -52,7 +53,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setAuthState({ username: "", id: 0, role:0, status: false });
-   
+    window.location.href="/login";
   };
 
   return (

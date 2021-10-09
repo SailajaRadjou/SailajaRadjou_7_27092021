@@ -51,7 +51,7 @@ router.post("/login", async (req, res, next) => {
           console.log("username :" + username);
           console.log("req.body.username :" + username);
           console.log("Access Token user.js : "+accessToken);
-          res.json({ token: accessToken, userName: username, id: user.id });
+          res.json({ token: accessToken, userName: username, id: user.id, role: user.role });
           res.json(req.body);
           res.json(req.body.userName);
          next();
@@ -90,7 +90,8 @@ router.post("/login", async (req, res, next) => {
           { password: hash },
           { where: { userName: user.userName } }
         );
-        res.json("PASSWORD CHANGED SUCCESSFULLY");
+        console.log("password :");
+       res.status(200).json({message : "PASSWORD CHANGED SUCCESSFULLY"});
       });
     });
   });
