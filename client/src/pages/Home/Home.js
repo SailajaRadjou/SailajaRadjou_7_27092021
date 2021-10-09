@@ -10,19 +10,10 @@ function Home() {
     const [AllPosts, setAllPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
 
-    let history = useHistory();
-    
-    
+    let history = useHistory();    
 
     useEffect(() => {
-        fetch('http://localhost:3001/auth/profileinfo/1')
-        .then((response) => {
-            return response.json();
-        })
-        .then((result) => {
-            window.localStorage.setItem('admin',JSON.stringify(result));
-        });
-
+        
         if (!localStorage.getItem("accessToken")) {
             history.push("/login");
         }

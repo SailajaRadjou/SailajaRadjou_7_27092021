@@ -65,7 +65,7 @@ router.post("/login", async (req, res, next) => {
     const userBody=req.user;
     const user = await Users.findOne({ where: { id: userBody.id } });
     console.log("user logged : "+ JSON.stringify(user));
-    res.json(req.user);
+    res.json(user);
     
   });
 

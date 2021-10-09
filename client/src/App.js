@@ -13,16 +13,17 @@ import ChangePassword from './pages/ChangePassword/ChangePassword';
 import { AuthContext } from './Helpers/AuthContext';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+
 
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
+    role:0,
     status: false,
   });
 
-  let history = useHistory();
+  
   
   useEffect(() => {
     axios.get('http://localhost:3001/auth/token', 
@@ -32,6 +33,7 @@ function App() {
       },
     }) 
     .then ((response) => {
+      console.log("response.data : "+response.data.userName);
       if (response.data.error){
         setAuthState({ ...authState, status: false });
       }
@@ -40,15 +42,17 @@ function App() {
         setAuthState({
           username: response.data.userName,
           id: response.data.id,
+          role:response.data.role,
           status: true,
         });
+        console.log("authstate appjs : "+JSON.stringify(authState));
       }
     });    
   }, []);
 
   const logout = () => {
     localStorage.removeItem("accessToken");
-    setAuthState({ username: "", id: 0, status: false });
+    setAuthState({ username: "", id: 0, role:0, status: false });
     
   };
 

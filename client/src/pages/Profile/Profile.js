@@ -10,8 +10,7 @@ function Profile() {
     const {authState} = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [allPosts, setAllPosts] = useState([]);
-    let userRole = JSON.parse(localStorage.getItem('admin'));
-    console.log("user role : "+ userRole.userName);
+    
     useEffect(() => {
         axios.get(`http://localhost:3001/auth/profileinfo/${id}`)
         .then((response) => {
@@ -44,7 +43,7 @@ function Profile() {
                 <div className="card text-center m-5 profile_display">
                     <div className="card-body">
                         <h5 className="card-title"> Username: {username}</h5>
-                        {((authState.username === username) || (userRole.userName === authState.username)) && 
+                        {((authState.username === username) || (authState.role===1)) && 
                             <>
                                 <button className="btn btn-primary loginButton" type="submit"
                                     onClick={() => {

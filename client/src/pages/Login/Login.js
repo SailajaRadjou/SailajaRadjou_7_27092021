@@ -23,6 +23,7 @@ function Login() {
             setAuthState({
                 username: response.data.userName,
                 id: response.data.id,
+                role: response.data.role,
                 status: true,
             });
             history.push("/");

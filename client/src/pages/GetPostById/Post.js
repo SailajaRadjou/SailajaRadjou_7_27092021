@@ -13,11 +13,10 @@ function Post() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  let userRole = JSON.parse(localStorage.getItem('admin'));
-
   const {authState} = useContext(AuthContext);
 
   useEffect(() => {
+      console.log("authstate : "+JSON.stringify(authState));
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
@@ -121,7 +120,7 @@ function Post() {
                         <div className="card getOnePoast_display">
                             <div className="card-body">
                                <div onClick={() => {
-                                   if(authState.username === postObject.userName){
+                                   if((authState.username === postObject.userName)||(authState.role === 1)){
                                        editPost("title");
                                     }
                                     }}>
@@ -132,7 +131,7 @@ function Post() {
                                     </div>
                                 </div>
                                 <div onClick={() => {
-                                    if(authState.username === postObject.userName){
+                                    if((authState.username === postObject.userName)|| (authState.role === 1)){
                                         editPost("text")
                                     }
                                     }}>
@@ -155,10 +154,10 @@ function Post() {
                                     </textarea>
                                 </div>
                                 <div>
-                                    <button className="btn btn-primary" type="submit" onClick={addComment}>Comments</button>
+                                    <button className="btn btn-primary loginButton" type="submit" onClick={addComment}>Comments</button>
                                     
-                                    {((authState.username === postObject.userName) || (userRole.userName === authState.username)) && (
-                                        <button className="btn btn-primary"
+                                    {((authState.username === postObject.userName) || (authState.role === 1)) && (
+                                        <button className="btn btn-primary loginButton"
                                          type="submit"
                                          onClick={() => {
                                              deletePost(postObject.id);
@@ -176,8 +175,8 @@ function Post() {
                                                  <input className="form-control" disabled={true}  placeholder={comment.commentBody} />
                                             </div>
                                             <label>authuser:{authState.username}</label>
-                                                {((authState.username === comment.userName) || (userRole.userName === authState.username)) && (
-                                                        <button onClick = {() => {
+                                                {((authState.username === comment.userName) || (authState.role === 1)) && (
+                                                        <button className="loginButton" onClick = {() => {
                                                             deleteComment(comment.id);
                                                         }}>
                                                             Supprimer 
