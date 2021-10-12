@@ -43,6 +43,8 @@ function Home() {
                     }
                     else{
                         const likesArray = post.Likes;
+                        //The pop() method removes the last element from an array and returns that element.
+                        //This method changes the length of the array.
                         likesArray.pop();
                         return {...post, Likes: likesArray };
                     }

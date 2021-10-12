@@ -7,7 +7,7 @@ function Profile() {
 
     let { id } = useParams();
     let history = useHistory();
-    const {authState} = useContext(AuthContext);
+    const {authState, setAuthState} = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [allPosts, setAllPosts] = useState([]);
     
@@ -34,6 +34,8 @@ function Profile() {
         })
         .then(() => {
             alert("User Account Deleted Successfully");
+            localStorage.removeItem("accessToken");
+            setAuthState({ username: "", id: 0, role:0, status: false });
             history.push("/signup");
         });
         }

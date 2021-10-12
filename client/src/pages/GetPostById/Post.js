@@ -54,12 +54,12 @@ function Post() {
   };
 
   const deleteComment = (cid) => {
-      alert(cid);
     axios
       .delete(`http://localhost:3001/comments/${cid}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
+          //The filter() method creates a new array with all elements that pass the test implemented by the provided function.
         setComments(
           comments.filter((val) => {
             return val.id != cid;
